@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/22 14:35:56 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/22 16:49:24 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,4 +137,22 @@ Egal::~Egal(void) {}
 bool 	Egal::compare()
 {
 	return (this->_prev_facts[0].calc());
+}
+
+
+
+Not::Not(void): AOperator(NOT, NULL, NULL, NULL, NULL) {}
+
+Not::Not(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+
+Not::Not(const Not & src)
+{
+	*this = src
+}
+
+Not::~Not(void) {}
+
+bool 	Not::compare()
+{
+	return (!this->_prev_facts[0].calc());
 }

@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/22 14:26:29 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/22 16:49:51 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 # define AOPERATOR_HPP
 
 # define	EGAL 0
-# define	AND 1 
-# define	OR 2
-# define	XOR 3
+# define	NOT 1
+# define	AND 2 
+# define	OR 3
+# define	XOR 4
 
 # include	"Fact.hpp"
 
@@ -78,6 +79,17 @@ class	Egal: public AOperator
 		Egal(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
 		Egal(const Egal & src);
 		~Egal(void);
+
+		virtual bool	compare();
+};
+
+class	Not: public AOperator
+{
+	public:
+		Not(void);
+		Not(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
+		Not(const Not & src);
+		~Not(void);
 
 		virtual bool	compare();
 };
