@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/26 18:24:42 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:22:41 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ int			Graph::get_fact_id(string name)
 
 void		Graph::create_fact(string name)
 {
-	this.facts.push_back(new Fact(name, false));
-	this.n_facts++;
+	this.facts.push_back(Fact(name, false));
 }
 
 bool		Graph::fact_exist(string name)

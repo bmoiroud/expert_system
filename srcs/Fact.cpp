@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 15:10:10 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:30:35 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,20 +36,21 @@ void	Fact::create_operator(vector <string> str, int i, Graph *graph)
 {
 	int		n;
 
-	while ()
+	while (str[i])
 	{
 		n = this._prev.size();
 		if (str[i] == "|")
-			this._prev.push_back(new Or());
+			this._prev.push_back(Or());
 		else if (str[i] == "+")
-			this._prev.push_back(new And());
+			this._prev.push_back(And());
 		else if (str[i] == "^")
-			this._prev.push_back(new Xor());
+			this._prev.push_back(Xor());
 		else
-			this._prev.push_back(new Egal());
+			this._prev.push_back(Egal());
 		if (is_fact(str[i + 1]))
-			this._prev.connect_fact(str, i + 1, graph);
+			this._prev[n].connect_fact(str, i + 1, graph);
 		else
-			this._prev.connect_op(str, i + 1, graph);
+			this._prev[n].connect_op(str, i + 1, graph);
+		i++;
 	}
 }

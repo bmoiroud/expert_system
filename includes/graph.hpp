@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/26 18:26:54 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:51:58 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ class		Graph
 		int				get_fact_id(string name)
 
 		int				n_facts;
-		vector <Fact>	facts;
+		vector <Fact*>	facts;
 };
 
 #endif
