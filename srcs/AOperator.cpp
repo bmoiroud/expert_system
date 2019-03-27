@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/22 16:49:24 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:56:33 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,29 @@ AOperator::AOperator(const AOperator & src)
 }
 
 AOperator::~AOperator(void) {}
+
+void	AOperator::connect_fact(vector <string> str, int i, Graph *graph, bool not=false)
+{
+	int		id;
+
+	id = 0;
+	if (str[i].length() != 2 && !not)
+		if (!graph.fact_exist(str[i]))
+			graph.create_fact(str[i]);
+	else if (str[i].length() == 2 && not)
+		if (!graph.fact_exist(str[i]))
+			graph.create_fact(str[i]);
+	else
+	{
+		id = this._prev_op.size();
+		this._prev_op.push_back(new Not());
+		this._next_op[id - 1].connect_fact(str, i, graph, true);
+	}
+
+	id = graph.get_fact_id(str[i]);
+	this._prev_facts.push_back(graph.facts[id]);
+	graph.facts[id].create_operator(str, i + 1, graph);
+}
 
 
 

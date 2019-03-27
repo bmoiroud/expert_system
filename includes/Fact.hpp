@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expert_sys.hpp                                     :+:      :+:    :+:   */
+/*   Fact.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/25 16:53:10 by bmoiroud         ###   ########.fr       */
+/*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
+/*   Updated: 2019/03/27 14:33:31 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXPERT_HPP
-# define EXPERT_HPP
+#ifndef FACT_HPP
+# define FACT_HPP
 
 # include <iostream>
 # include <string>
-# include <cstring>
-# include <fstream>
 # include <vector>
 
-# include "graph.hpp"
+# include "AOperator.hpp"
+# include "State.hpp"
 
 using namespace std;
 
-string				trim(string str);
-string				remove_comment(string str);
-vector <string>		strsplit(string str);
-bool				check_term(string str);
-bool				check_order(vector <string> terms);
-void				parse(const char *filename, Graph graph);
+class	Fact: public State
+{
+	public:
+		Fact(void);
+		Fact(const string name, const bool state);
+		Fact(const Fact & src);
+		~Fact(void);
+
+		bool		calc(void);
+		bool		get_state(void);
+		void		create_operator(vector <string> str, int i, Graph *graph);
+
+		string		name;
+		
+	private:
+		bool				_state;
+		vector <AOperator>	_prev;
+};
 
 #endif

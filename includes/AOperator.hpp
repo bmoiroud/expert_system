@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/22 16:49:51 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 14:33:17 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define	XOR 4
 
 # include	"Fact.hpp"
+# include	"Graph.hpp"
 
 class	AOperator
 {
@@ -30,13 +31,12 @@ class	AOperator
 		~AOperator(void);
 
 		virtual bool	compare() = 0;
+		void			connect_fact(vector <string> str, int i, Graph *graph);
 	
 	private:
-		int				_type;
-		Fact			*_prev_facts;
-		Fact			*_next_facts;
-		AOperator		*_prev_op;
-		AOperator		*_next_op;
+		int					_type;
+		vector <Fact>		_facts;
+		vector <AOperator>	_op;
 };
 
 class	And: public AOperator
