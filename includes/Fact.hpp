@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:56:54 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/03/27 17:18:00 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <string>
 # include <vector>
 
-#include "Graph.hpp"
+# include "Graph.hpp"
 # include "AOperator.hpp"
 # include "State.hpp"
 
@@ -33,7 +33,7 @@ class	Fact: public Graph
 
 		bool		calc(void);
 		bool		get_state(void);
-		void		create_operator(vector <string> str, int i, Graph *graph);
+		void		create_operator(vector <string> str, int i);
 
 		string		name;
 		
