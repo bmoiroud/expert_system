@@ -6,23 +6,13 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 17:07:02 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/03/27 17:12:03 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.hpp"
 
 Graph::Graph(void) {}
-
-Graph::Graph(const Graph &src)
-{
-	*this = src;
-}
-
-Graph::Graph(const Fact *facts)
-{
-	this->facts = facts;
-}
 
 Graph::~Graph(void) {}
 

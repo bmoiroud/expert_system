@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:51:58 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 17:13:31 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ class		Graph
 {
 	public:
 		Graph(void);
-		Graph(const Graph &src);
-		Graph(const Fact *facts);
 		~Graph(void);
 
 		void			create_fact(string name);
