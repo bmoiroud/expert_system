@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:45:22 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:59:40 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,14 +51,17 @@ void	AOperator::connect_fact(vector <string> str, int i, Graph *graph, bool not=
 	else
 	{
 		
-		graph.facts[id].create_operator(str, i + 1, graph);
+		graph.facts[id].create_operator(str, i - 1, graph);
 	}
 
 	id = graph.get_fact_id(str[i]);
 	this._facts.push_back(graph.facts[id]);
 }
 
-void	AOperator::connect_op(vector <string> str, int i, )
+void	AOperator::connect_op(vector <string> str, int i)
+{
+	
+}
 
 And::And(void): AOperator(AND, NULL, NULL, NULL, NULL) {}
 
