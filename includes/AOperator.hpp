@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:56:54 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/03/27 17:19:34 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class	AOperator
 		~AOperator(void);
 
 		virtual bool	compare() = 0;
-		void			connect_fact(vector <string> str, int i, Graph *graph);
+		void			connect_fact(vector <string> str, int i);
 	
 	private:
 		int					_type;
