@@ -3,10 +3,11 @@
 
 #include <vector>
 #include "Fact.hpp"
+#include "Graph.hpp"
 
 using namespace std;
 
-class	State
+class	State: public Graph
 {
 	vector<Fact>	isTrue;
 	vector<Fact>	isFalse;

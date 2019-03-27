@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:43:32 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:56:54 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 # define	OR 3
 # define	XOR 4
 
-# include	"Fact.hpp"
 # include	"Graph.hpp"
+# include	"Fact.hpp"
 
 class	AOperator
 {

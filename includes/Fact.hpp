@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 14:33:31 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/27 16:56:54 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,13 @@
 # include <string>
 # include <vector>
 
+#include "Graph.hpp"
 # include "AOperator.hpp"
 # include "State.hpp"
 
 using namespace std;
 
-class	Fact: public State
+class	Fact: public Graph
 {
 	public:
 		Fact(void);
