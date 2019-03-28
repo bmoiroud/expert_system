@@ -6,13 +6,11 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 18:57:58 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:38:03 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fact.hpp"
-
-Fact::Fact(void) {}
 
 Fact::Fact(const string name, const bool state)
 {
@@ -20,16 +18,13 @@ Fact::Fact(const string name, const bool state)
 	this._state = state;
 }
 
-Fact::Fact(const Fact & src)
+Fact::~Fact()
 {
-	*this = src;
 }
-
-Fact::~Fact(void) {}
 
 bool	Fact::calc(void)
 {
-	
+	_prev.clear();
 }
 
 void	Fact::create_operator(vector <string> str, int i)
@@ -53,4 +48,9 @@ void	Fact::create_operator(vector <string> str, int i)
 			this._prev[n].connect_op(str, i - 1);
 		i++;
 	}
+}
+
+bool		change_state()
+{
+
 }

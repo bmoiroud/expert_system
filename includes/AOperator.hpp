@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 17:19:34 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:58:15 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include	"Graph.hpp"
 # include	"Fact.hpp"
 
-class	AOperator
+class	AOperator: public Graph
 {
 	public:
 		AOperator(void);
