@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/25 16:53:10 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/28 16:18:29 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ string				trim(string str);
 string				remove_comment(string str);
 vector <string>		strsplit(string str);
 bool				check_term(string str);
-bool				check_order(vector <string> terms);
-void				parse(const char *filename, Graph graph);
+bool				check_order(string line);
+void				parse(const char *filename);
 
 #endif

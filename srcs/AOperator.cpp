@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 18:57:25 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/28 15:19:37 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,15 @@
 AOperator::AOperator(void)
 {
 	this.type = 0;
-	this->_next_facts = NULL;
-	this->_prev_facts = NULL;
-	this->_next_op = NULL;
-	this->_prev_op = NULL;
+	this->_facts = NULL;
+	this->_op = NULL;
 }
 
-AOperator::AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op)
+AOperator::AOperator(int type, Fact *facts, AOperator *op)
 {
 	this.type = type;
-	this->_next_facts = next_f;
-	this->_prev_facts = prev_f;
-	this->_next_op = next_op;
-	this->_prev_op = prev_op;
+	this->_facts = next_f;
+	this->_op = next_op;
 }
 
 AOperator::AOperator(const AOperator & src)
@@ -39,13 +35,20 @@ AOperator::~AOperator(void) {}
 
 void	AOperator::connect_fact(vector <string> str, int i)
 {
+	if (!this->graph.fact_exist(str[i]))
+		this->graph.create_fact(str[i]);
 }
 
 void	AOperator::connect_op(vector <string> str, int i)
+{
+	
+}
+
+
 
 And::And(void): AOperator(AND, NULL, NULL, NULL, NULL) {}
 
-And::And(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+And::And(void): AOperator(int type, Fact *facts, AOperator *op) {}
 
 And::And(const And & src)
 {
@@ -73,7 +76,7 @@ bool 	And::compare()
 
 Or::Or(void): AOperator(OR, NULL, NULL, NULL, NULL) {}
 
-Or::Or(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+Or::Or(void): AOperator(int type, Fact *facts, AOperator *op) {}
 
 Or::Or(const Or & src)
 {
@@ -101,7 +104,7 @@ bool	Or::compare()
 
 Xor::Xor(void): AOperator(XOR, NULL, NULL, NULL, NULL) {}
 
-Xor::Xor(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+Xor::Xor(void): AOperator(int type, Fact *facts, AOperator *op) {}
 
 Xor::Xor(const Xor & src)
 {
@@ -129,7 +132,7 @@ bool 	Xor::compare()
 
 Egal::Egal(void): AOperator(EGAL, NULL, NULL, NULL, NULL) {}
 
-Egal::Egal(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+Egal::Egal(void): AOperator(int type, Fact *facts, AOperator *op) {}
 
 Egal::Egal(const Egal & src)
 {
@@ -147,7 +150,7 @@ bool 	Egal::compare()
 
 Not::Not(void): AOperator(NOT, NULL, NULL, NULL, NULL) {}
 
-Not::Not(void): AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op) {}
+Not::Not(void): AOperator(int type, Fact *facts, AOperator *op) {}
 
 Not::Not(const Not & src)
 {
