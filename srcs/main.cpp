@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/27 16:04:54 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/28 17:00:52 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,14 @@ vector <string>		strsplit(string str)
 	while (str[i])
 	{
 		j = i;
-		while (str[i] != ' ' && str[i] != '\t' && str[i])
+		cout << 1;
+		if (str[i] != '!')
+			while (str[i] != ' ' && str[i] != '\t' && str[i])
+				i++;
+		else
 			i++;
 		str2.push_back(str.substr(j, i - j));
-		while (str[i] == ' ' || str[i] == '\t' && str[i])
+		while ((str[i] == ' ' || str[i] == '\t') && str[i])
 			i++;
 	}
 	return (str2);
@@ -52,8 +56,10 @@ bool				is_fact(string str)
 	if (str.length() > 2)
 		return (false);
 	if (str.length() == 2)
+	{
 		if (str[0] != '!' && (str[1] < 65 || str[1] > 90))
-			return (false)
+			return (false);
+	}
 	else
 		if ((str[0] < 65 || str[0] > 90))
 			return (false);
@@ -72,16 +78,39 @@ bool				check_term(string str)
 	return (!(!is_fact(str) && !is_operator(str) && str != "=>"));
 }
 
-bool				check_order(vector <string> terms)
+int					par_close(string line, int i)
+{
+	int		j;
+
+	j = 1;
+	while(line[i] && j)
+		if (line[i] == '(' || line[i] == ')')
+			j += (line[i] == '(') ? 1 : -1;
+	return (j);
+}
+
+int					check_par(string line, int i, char c = 0)
+{
+	if (line[i] == c)
+		return (1);
+	else if (line[i] == ')')
+		return (0);
+	else if (line[i] == '(')
+		return (check_par(line, i + 1, ')') * check_par(line, par_close(line, i), ')'));
+	else
+		return (line, i + 1);
+}
+
+bool				check_order(string line)
 {
 	return (true);
 }
 
-void				parse(const char *filename, Graph graph)
+void				parse(const char *filename)
 {
 	ifstream		file(filename);
 	string			line;
-	vector <string>	terms;
+	vector <string>	lines;
 	size_t			first_char;
 	int				i;
 	int				j;
@@ -92,20 +121,15 @@ void				parse(const char *filename, Graph graph)
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
-			terms = strsplit(line);
-			i = -1;
-			if (!check_order(terms))
+			if (!check_order(line) || !check_par(line, 0))
 				exit(EXIT_FAILURE);
-			while (++i < terms.size())
-				if (!check_term(terms[i]))
-					exit(EXIT_FAILURE);
 		}
 	}
 }
 
 int					main(int argc, const char *argv[])
 {
-	Graph			graph;
+	// Graph			graph;
 	
 	if (argc < 2)
 		cout << "usage" << endl;
@@ -113,7 +137,7 @@ int					main(int argc, const char *argv[])
 		cout << "trop d'arg" << endl;
 	else
 	{
-		parse(argv[1], graph);
+		parse(argv[1]);
 	}
 	return (0);
 }
