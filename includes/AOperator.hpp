@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 16:58:15 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/03/28 18:50:12 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,15 +25,15 @@
 class	AOperator: public Graph
 {
 	public:
-		AOperator(void);
-		AOperator(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		AOperator(const AOperator & src);
+		virtual AOperator::AOperator() = 0;
 		~AOperator(void);
 
 		virtual bool	compare() = 0;
 		void			connect_fact(vector <string> str, int i);
+		void			connect_op(vector <string> str, int i);
 	
 	private:
+		Fact				*_parent;
 		int					_type;
 		vector <Fact*>		_facts;
 		vector <AOperator>	_op;
@@ -42,9 +42,7 @@ class	AOperator: public Graph
 class	And: public AOperator
 {
 	public:
-		And(void);
-		And(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		And(const And & src);
+		And(char *liaison, Fact *parent);
 		~And(void);
 
 		virtual bool	compare();
@@ -53,9 +51,7 @@ class	And: public AOperator
 class	Or: public AOperator
 {
 	public:
-		Or(void);
-		Or(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		Or(const Or & src);
+		Or(char *liaison, Fact *parent);
 		~Or(void);
 		
 		virtual bool	compare();
@@ -64,9 +60,7 @@ class	Or: public AOperator
 class	Xor: public AOperator
 {
 	public:
-		Xor(void);
-		Xor(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		Xor(const Xor & src);
+		Xor(char *liaison, Fact *parent);
 		~Xor(void);
 		
 		virtual bool	compare();
@@ -75,9 +69,7 @@ class	Xor: public AOperator
 class	Egal: public AOperator
 {
 	public:
-		Egal(void);
-		Egal(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		Egal(const Egal & src);
+		Egal(char *liaison, Fact *parent);
 		~Egal(void);
 
 		virtual bool	compare();
@@ -86,9 +78,7 @@ class	Egal: public AOperator
 class	Not: public AOperator
 {
 	public:
-		Not(void);
-		Not(int type, Fact *prev_f, Fact *next_f, AOperator *prev_op, AOperator *next_op);
-		Not(const Not & src);
+		Not(char *liaison, Fact *parent);
 		~Not(void);
 
 		virtual bool	compare();
