@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 20:16:57 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 20:28:08 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -206,11 +206,10 @@ int					check_truc(string line, int i, int c=0)
 		
 }
 
-void				parse(const char *filename)
+vector <string>		parse(const char *filename, vector <string> lines)
 {
 	ifstream		file(filename);
 	string			line;
-	vector <string>	lines;
 	size_t			first_char;
 	int				i;
 	int				j;
@@ -237,6 +236,7 @@ void				parse(const char *filename)
 	}
 	if (k != 124)
 		exit(EXIT_FAILURE);
+	return (lines);
 }
 
 void				error(string line)
@@ -266,6 +266,7 @@ bool				is_registered(char c, vector <char> facts)
 int					main(int argc, const char *argv[])
 {
 	// Graph			graph;
+	vector <string>	lines;
 	
 	if (argc < 2)
 		cout << "usage" << endl;
@@ -273,7 +274,7 @@ int					main(int argc, const char *argv[])
 		cout << "trop d'arg" << endl;
 	else
 	{
-		parse(argv[1]);
+		parse(argv[1], lines);
 		// create_facts(lines, graph);
 		// split(lines)
 		// rpn
