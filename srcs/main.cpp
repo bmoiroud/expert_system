@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 19:24:29 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 19:35:19 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,11 @@ vector <string>		strsplit(string str)
 			i++;
 	}
 	return (str2);
+}
+
+bool				is_fact(char c)
+{
+	return (c >= 65 && c <= 90);
 }
 
 bool				is_fact(string str)
@@ -235,15 +240,15 @@ bool				is_registered(char c, vector <char> facts)
 	return (false);
 }
 
-// void				create_facts(vector <string> lines)
-// {
-// 	vector <char>	facts;
+void				create_facts(vector <string> lines, Graph graph)
+{
+	vector <char>	facts;
 
-// 	for(int i = 0; i < lines.size(); i++)
-// 		for(int j = 0; j < lines[i].size(); j++)
-// 			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
-// 				graph.create_fact(lines[i][j]);
-// }
+	for(int i = 0; i < lines.size(); i++)
+		for(int j = 0; j < lines[i].size(); j++)
+			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
+				graph.create_fact(lines[i][j]);
+}
 
 int					main(int argc, const char *argv[])
 {
