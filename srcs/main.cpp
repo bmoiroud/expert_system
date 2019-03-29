@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 18:28:24 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 18:49:45 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -195,7 +195,7 @@ void				parse(const char *filename)
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
-			// cout << endl << line << endl;
+			cout << endl << line << endl;
 			if (line[0] == '=' || line[0] == '?')
 			{
 				k += line[0];
