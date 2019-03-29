@@ -31,6 +31,7 @@ class		Graph
 		static int				get_fact_id(string name);
 		static string			get_list(string type);
 		static void				print_list();
+		void					resolve();
 
 		static int				n_facts;
 		static vector<Fact*>	facts;

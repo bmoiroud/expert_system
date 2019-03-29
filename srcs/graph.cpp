@@ -58,11 +58,16 @@ int			Graph::get_fact_id(string name)
 	return (-1);
 }
 
-static string			get_list(string type)
+static string			Graph::get_list(string type)
 {
 
 }
 
-static void				print_list()
+static void				Graph::print_list()
 {
+}
+
+void			Graph::resolve()
+{
+
 }
