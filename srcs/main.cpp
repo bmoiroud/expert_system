@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 18:49:45 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 19:24:29 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,16 @@ int					check_par(string line)
 		(line[i] == '(') ? j++ : 0;
 		if (j < k)
 			return (-1);
+		if (line[i] == '=' && line[i + 1] == '>')
+		{
+			if (j != k)
+				return (-1);
+			else
+			{
+				j = 0;
+				k = 0;
+			}
+		}
 	}
 	// cout << "j: " << j << " k: " << k << endl;
 	if (j != k)
@@ -217,6 +227,24 @@ void				error(string line)
 	exit(EXIT_FAILURE);
 }
 
+bool				is_registered(char c, vector <char> facts)
+{
+	for(int i = 0; i < facts.size(); i++)
+		if (facts[i] == c)
+			return (true);
+	return (false);
+}
+
+// void				create_facts(vector <string> lines)
+// {
+// 	vector <char>	facts;
+
+// 	for(int i = 0; i < lines.size(); i++)
+// 		for(int j = 0; j < lines[i].size(); j++)
+// 			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
+// 				graph.create_fact(lines[i][j]);
+// }
+
 int					main(int argc, const char *argv[])
 {
 	// Graph			graph;
@@ -228,6 +256,7 @@ int					main(int argc, const char *argv[])
 	else
 	{
 		parse(argv[1]);
+		
 		cout << "ok" << endl;
 	}
 	return (0);
