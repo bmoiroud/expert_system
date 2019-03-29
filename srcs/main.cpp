@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 17:00:52 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 16:51:24 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,11 @@ bool				is_fact(string str)
 	return (true);
 }
 
+bool				is_operator(char c)
+{
+	return (c == '|' || c == '+' || c == '^');
+}
+
 bool				is_operator(string str)
 {
 	if (str.length() != 1)
@@ -101,9 +106,65 @@ int					check_par(string line, int i, char c = 0)
 		return (line, i + 1);
 }
 
-bool				check_order(string line)
+/*
+	c = 0 > fait
+	c = 1 > operateur
+	c = 2 > fait apres =>
+	c = 3 > operateur apres =>
+	c = -1 > erreur
+*/
+
+int					check_order(string line, int i, int c = 0)
 {
-	return (true);
+	cout << "line[i]: "<< line[i] << " c: " << c << endl;
+	if (c > 3)
+		return ( -1);
+	else if (!line[i])
+		return (1);
+	else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)
+		return (check_order(line, i + 1, c + 1));
+	else if (c % 2 == 1 && is_operator(line[i]))
+		return (check_order(line, i + 1, c - 1));
+	else if (c % 2 == 0 && line[i] == '!')
+		return (check_order(line, i + 1, c));
+	else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])
+	{
+		cout << "=>" << endl;
+		return (check_order(line, i + 2, c + ((c % 2 == 0) ? 2 : 1)));
+	}
+	else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
+	{
+		while(line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
+			i++;
+		return (check_order(line, i, c));
+	}
+	else
+		return (-1);
+}
+
+int					check_truc(string line, int i, int c=0)
+{
+	if ((line[i] == '?' || line[i] == '=') && c == 0)
+	{
+		cout << "if ((line[0] == '?' || line[0] == '=') && c != 0)" << endl;
+		return (check_truc(line, i + 1, 1));
+	}
+	else if ((line[i] >= 65 && line[i] <= 90) || (line[i] == ' ' || line[i] == '\t'))
+	{
+		cout << "else if ((line[i] >= 65 && line[i] <= 90) || (line[i] == ' ' || line[i] == '\t'))" << endl;
+		return (check_truc(line, i + 1, 1));
+	}
+	else if (!line[i])
+	{
+		cout << "else if (!line[i])" << endl;
+		return (1);
+	}
+	else
+	{
+		cout << "else" << endl;
+		return (-1);
+	}
+		
 }
 
 void				parse(const char *filename)
@@ -114,17 +175,34 @@ void				parse(const char *filename)
 	size_t			first_char;
 	int				i;
 	int				j;
+	int				k;
 
+	k = 0;
 	while (getline(file, line))
 	{
 		first_char = line.find_first_not_of(" \t\n");
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
-			if (!check_order(line) || !check_par(line, 0))
+			cout << line << endl;
+			if (line[0] == '=' || line[0] == '?')
+			{
+				k += line[0];
+				if (k > 124 || check_truc(line, 0) == -1)
+				{
+					cout << "pas bon" << endl;
+					exit(EXIT_FAILURE);
+				}
+			}
+			else if (check_order(line, 0) == -1) //|| !check_par(line, 0))
+			{
+				cout << "pas bon" << endl;
 				exit(EXIT_FAILURE);
+			}
 		}
 	}
+	if (k != 124)
+		exit(EXIT_FAILURE);
 }
 
 int					main(int argc, const char *argv[])

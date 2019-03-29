@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 16:18:29 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 16:36:08 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,18 @@
 # include <fstream>
 # include <vector>
 
-# include "graph.hpp"
+// # include "graph.hpp"
 
 using namespace std;
 
+vector <string>		strsplit(string str);
 string				trim(string str);
 string				remove_comment(string str);
-vector <string>		strsplit(string str);
 bool				check_term(string str);
-bool				check_order(string line);
+bool				is_operator(string str);
+bool				is_operator(char c);
 void				parse(const char *filename);
+int					check_truc(string line, int i, int c);
+int					check_order(string line, int i, int c);
 
 #endif
