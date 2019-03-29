@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 16:51:24 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 18:28:24 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,27 +83,26 @@ bool				check_term(string str)
 	return (!(!is_fact(str) && !is_operator(str) && str != "=>"));
 }
 
-int					par_close(string line, int i)
+int					check_par(string line)
 {
+	int		i;
 	int		j;
+	int		k;
 
-	j = 1;
-	while(line[i] && j)
-		if (line[i] == '(' || line[i] == ')')
-			j += (line[i] == '(') ? 1 : -1;
-	return (j);
-}
-
-int					check_par(string line, int i, char c = 0)
-{
-	if (line[i] == c)
-		return (1);
-	else if (line[i] == ')')
-		return (0);
-	else if (line[i] == '(')
-		return (check_par(line, i + 1, ')') * check_par(line, par_close(line, i), ')'));
-	else
-		return (line, i + 1);
+	i = -1;
+	j = 0;
+	k = 0;
+	while(line[++i])
+	{
+		(line[i] == ')') ? k++ : 0;
+		(line[i] == '(') ? j++ : 0;
+		if (j < k)
+			return (-1);
+	}
+	// cout << "j: " << j << " k: " << k << endl;
+	if (j != k)
+		return (-1);
+	return (0);
 }
 
 /*
@@ -116,54 +115,66 @@ int					check_par(string line, int i, char c = 0)
 
 int					check_order(string line, int i, int c = 0)
 {
-	cout << "line[i]: "<< line[i] << " c: " << c << endl;
 	if (c > 3)
+	{
+		// cout << "if (c > 3)" << endl;
 		return ( -1);
+	}
 	else if (!line[i])
+	{
+		// cout << "else if (!line[i])" << endl;
 		return (1);
+	}
 	else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)
+	{
+		// cout << "else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)" << endl;
 		return (check_order(line, i + 1, c + 1));
+	}
 	else if (c % 2 == 1 && is_operator(line[i]))
+	{
+		// cout << "else if (c % 2 == 1 && is_operator(line[i]))" << endl;
 		return (check_order(line, i + 1, c - 1));
+	}
 	else if (c % 2 == 0 && line[i] == '!')
+	{
+		// cout << "else if (c % 2 == 0 && line[i] == '!')" << endl;
 		return (check_order(line, i + 1, c));
+	}
 	else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])
 	{
-		cout << "=>" << endl;
+		// cout << "else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])" << endl;
 		return (check_order(line, i + 2, c + ((c % 2 == 0) ? 2 : 1)));
 	}
 	else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
 	{
+		// cout << "else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')" << endl;
 		while(line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
 			i++;
 		return (check_order(line, i, c));
 	}
 	else
+	{
+		// cout << "else" << endl;
 		return (-1);
+	}
 }
 
 int					check_truc(string line, int i, int c=0)
 {
 	if ((line[i] == '?' || line[i] == '=') && c == 0)
-	{
-		cout << "if ((line[0] == '?' || line[0] == '=') && c != 0)" << endl;
 		return (check_truc(line, i + 1, 1));
-	}
-	else if ((line[i] >= 65 && line[i] <= 90) || (line[i] == ' ' || line[i] == '\t'))
-	{
-		cout << "else if ((line[i] >= 65 && line[i] <= 90) || (line[i] == ' ' || line[i] == '\t'))" << endl;
+	else if (line[i] >= 65 && line[i] <= 90)
 		return (check_truc(line, i + 1, 1));
-	}
 	else if (!line[i])
-	{
-		cout << "else if (!line[i])" << endl;
 		return (1);
+	else if (line[i] == ' ' || line[i] == '\t')
+	{
+		while (line[i] == ' ' || line[i] == '\t')
+			i++;
+		return (check_truc(line, i, 1));
 	}
 	else
-	{
-		cout << "else" << endl;
 		return (-1);
-	}
 		
 }
 
@@ -184,25 +195,26 @@ void				parse(const char *filename)
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
-			cout << line << endl;
+			// cout << endl << line << endl;
 			if (line[0] == '=' || line[0] == '?')
 			{
 				k += line[0];
-				if (k > 124 || check_truc(line, 0) == -1)
-				{
-					cout << "pas bon" << endl;
-					exit(EXIT_FAILURE);
-				}
+				if (k > 124 || (line[0] == '?' && !line[1]) || check_truc(line, 0) == -1)
+					error(line);
 			}
-			else if (check_order(line, 0) == -1) //|| !check_par(line, 0))
-			{
-				cout << "pas bon" << endl;
-				exit(EXIT_FAILURE);
-			}
+			else if (check_order(line, 0) == -1 || check_par(line) == -1)
+				error(line);
 		}
+		lines.push_back(line);
 	}
 	if (k != 124)
 		exit(EXIT_FAILURE);
+}
+
+void				error(string line)
+{
+	cout << "invalid line: \"" << line << "\"" << endl;
+	exit(EXIT_FAILURE);
 }
 
 int					main(int argc, const char *argv[])
@@ -216,6 +228,7 @@ int					main(int argc, const char *argv[])
 	else
 	{
 		parse(argv[1]);
+		cout << "ok" << endl;
 	}
 	return (0);
 }
