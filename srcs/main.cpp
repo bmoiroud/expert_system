@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 20:07:26 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/03/29 20:16:57 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ int					check_order(string line, int i, int c = 0)
 	else if (!line[i])
 	{
 		// cout << "else if (!line[i])" << endl;
+		if (c < 2)
+			return (-1);
 		return (1);
 	}
 	else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)
