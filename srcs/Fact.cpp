@@ -24,6 +24,7 @@ Fact::~Fact()
 
 bool	Fact::calc(void)
 {
+	std::vector<>
 	_prev.clear();
 }
 

@@ -71,3 +71,24 @@ void			Graph::resolve()
 {
 
 }
+
+void			Graph::check_input()
+{
+	// faire un par un tous les statements en registrant dans un vector le resultat attendu. Si un statemen envoie un résultat oposé après calcul INCONHERENCE
+	std::string allFacts = "ABCD";
+	std::vector<std::string>	data;
+	while (allFacts.size())
+	{
+		data.push_back(input.substr(0 ,1));
+		//std::cout << input[0] << std::endl;
+		combinaison_fact(input, data);
+		input.erase(0,1);
+	}
+
+	for (int a = 0; a < data.size(); ++a)
+	{
+		std::cout << data[a] << std::endl;
+		check_case();
+	}
+	return 0;
+}
