@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 16:30:14 by eferrand          #+#    #+#             */
-/*   Updated: 2019/04/01 18:21:25 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 21:36:47 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	list_error_input()
 {
 }
 
-void	combinaison_fact(std::string input, std::vector<std::string> &data, std::string base = "")
+void	combinaison_fact(std::string input, std::vector<std::string> &data,
+		std::string base = "")
 {
 	int		i = 0;
 

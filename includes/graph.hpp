@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:39:48 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 21:46:03 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ using namespace std;
 class		Graph
 {
 	public:
-		Graph(void);
+		Graph(void) = 0;
 		~Graph(void);
 
 		void					create_fact(string name);

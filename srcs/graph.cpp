@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:39:13 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 21:46:02 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ using namespace std;
 
 Graph::Graph(void) {}
 
-Graph::~Graph(void) {}
+Graph::~Graph(void)
+{
+	facts.clear();
+}
 
 void			Graph::create_fact(string name)
 {

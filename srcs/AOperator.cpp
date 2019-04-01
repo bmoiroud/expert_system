@@ -6,13 +6,17 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:39:22 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 21:49:49 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AOperator.hpp"
 
-AOperator::~AOperator(void) {}
+AOperator::~AOperator(void)
+{
+	_facts.clear();
+	_op.clear();
+}
 
 void	AOperator::connect_fact(vector <string> str, int i)
 {
@@ -25,7 +29,7 @@ void	AOperator::connect_op(vector <string> str, int i)
 	
 }
 
-And::And(char *liaison, Fact *parent)
+And::And(char *liaison)
 {
 
 }
@@ -56,7 +60,7 @@ bool 	And::compare()
 	return (a & b);
 }
 
-Or::Or(char *liaison, Fact *parent)
+Or::Or(char *liaison)
 {
 
 }
@@ -87,7 +91,7 @@ bool	Or::compare()
 	return (a | b);
 }
 
-Xor::Xor(char *liaison, Fact *parent)
+Xor::Xor(char *liaison)
 {
 
 }
@@ -120,8 +124,9 @@ bool 	Xor::compare()
 
 
 
-Egal::Egal(char *liaison, Fact *parent)
+Egal::Egal(char *liaison)
 {
+
 }
 
 Egal::~Egal(void) {}
@@ -141,6 +146,7 @@ bool 	Egal::compare()
 
 Not::Not(char *liaison)
 {
+
 }
 
 Not::~Not(void) {}

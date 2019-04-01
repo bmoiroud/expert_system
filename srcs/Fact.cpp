@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:35:31 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 21:38:30 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ Fact::Fact(const string name, const bool state)
 
 Fact::~Fact()
 {
+	_prev.clear();
 }
 
 bool	Fact::calc(void)
@@ -31,7 +32,6 @@ bool	Fact::calc(void)
 		if (_prev[a].compare() == true)
 			return (true);
 	}
-	_prev.clear();
 }
 
 void	Fact::create_operator(vector <string> str, int i)
