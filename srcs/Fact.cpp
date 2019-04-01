@@ -24,6 +24,7 @@ Fact::~Fact()
 
 bool	Fact::calc(void)
 {
+	std::vector<>
 	_prev.clear();
 }
 
@@ -52,7 +53,15 @@ void	Fact::create_operator(vector <string> str, int i)
 	}
 }
 
-bool		change_state()
+bool		Fact::change_state()
 {
+	int	a;
 
+	a = -1;
+	while (++a < _prev.size())
+	{
+		if (_prev[a].calc() == true)
+		{
+		}
+	}
 }

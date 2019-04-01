@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 20:28:08 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/01 18:03:48 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,23 +187,37 @@ int					check_order(string line, int i, int c = 0)
 	}
 }
 
-int					check_truc(string line, int i, int c=0)
-{
-	if ((line[i] == '?' || line[i] == '=') && c == 0)
-		return (check_truc(line, i + 1, 1));
-	else if (line[i] >= 65 && line[i] <= 90)
-		return (check_truc(line, i + 1, 1));
-	else if (!line[i])
+int					check_init_req(string line, int i, int c = 0)
+{	
+	if (!line[i])
 		return (1);
+	else if ((line[i] == '?' || line[i] == '=') && c == 0)
+		return (check_init_req(line, i + 1, 1));
+	else if (line[i] >= 65 && line[i] <= 90)
+		return (check_init_req(line, i + 1, 1));
 	else if (line[i] == ' ' || line[i] == '\t')
 	{
 		while (line[i] == ' ' || line[i] == '\t')
 			i++;
-		return (check_truc(line, i, 1));
+		return (check_init_req(line, i, 1));
 	}
 	else
 		return (-1);
-		
+}
+
+int					check_mult_input(string line)
+{
+	vector <char>	facts;
+
+	for(int j = 0; j < line.size(); j++)
+		if (is_fact(line[j]))
+		{
+			if (!is_registered(line[j], facts))
+				facts.push_back(line[j]);
+			else
+				return (-1);
+		}
+	return (0);
 }
 
 vector <string>		parse(const char *filename, vector <string> lines)
@@ -226,7 +240,9 @@ vector <string>		parse(const char *filename, vector <string> lines)
 			if (line[0] == '=' || line[0] == '?')
 			{
 				k += line[0];
-				if (k > 124 || (line[0] == '?' && !line[1]) || check_truc(line, 0) == -1)
+				if (k > 124 || (line[0] == '?' && !line[1]) || check_init_req(line, 0) == -1)
+					error(line);
+				else if (line[0] == '=' && check_mult_input(line) == -1)
 					error(line);
 			}
 			else if (check_order(line, 0) == -1 || check_par(line) == -1)
@@ -253,15 +269,23 @@ bool				is_registered(char c, vector <char> facts)
 	return (false);
 }
 
-// void				create_facts(vector <string> lines, Graph graph)
-// {
-// 	vector <char>	facts;
+void				create_facts(vector <string> lines, Graph graph)
+{
+	vector <char>	facts;
 
-// 	for(int i = 0; i < lines.size(); i++)
-// 		for(int j = 0; j < lines[i].size(); j++)
-// 			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
-// 				graph.create_fact(lines[i][j]);
-// }
+	for(int i = 0; i < lines.size(); i++)
+		for(int j = 0; j < lines[i].size(); j++)
+			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
+			{
+				graph.create_fact(lines[i][j]);
+				facts.push_back(lines[i][j]);
+			}
+}
+
+string				rpn(string str)
+{
+	
+}
 
 int					main(int argc, const char *argv[])
 {
@@ -275,9 +299,9 @@ int					main(int argc, const char *argv[])
 	else
 	{
 		parse(argv[1], lines);
-		// create_facts(lines, graph);
-		// split(lines)
+		create_facts(lines, graph);
 		// rpn
+		// split(lines)
 		// creer graphe
 		cout << "ok" << endl;
 	}

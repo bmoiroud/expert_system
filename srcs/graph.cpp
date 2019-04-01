@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 20:17:50 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/01 14:29:21 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ Graph::Graph(void) {}
 
 Graph::~Graph(void) {}
 
-void		Graph::create_fact(string name)
+void			Graph::create_fact(string name)
 {
 	facts.push_back(Fact(name, false));
 }
 
-void		Graph::create_rule(vector <string> str)
+void			Graph::create_rule(vector <string> str)
 {
 	int		i;
 
@@ -31,7 +31,7 @@ void		Graph::create_rule(vector <string> str)
 	facts[get_fact_id(str[i])]->create_operator(str, i - 1);
 }
 
-bool		Graph::fact_exist(string name)
+bool			Graph::fact_exist(string name)
 {
 	int		i;
 
@@ -42,12 +42,12 @@ bool		Graph::fact_exist(string name)
 	return (false);
 }
 
-bool		Graph::calc_fact()
+bool			Graph::calc_fact()
 {
 
 }
 
-int			Graph::get_fact_id(string name)
+int				Graph::get_fact_id(string name)
 {
 	int		i;
 
@@ -58,11 +58,37 @@ int			Graph::get_fact_id(string name)
 	return (-1);
 }
 
-static string			get_list(string type)
+static string	Graph::get_list(string type)
 {
 
 }
 
-static void				print_list()
+static void		Graph::print_list()
 {
+}
+
+void			Graph::resolve()
+{
+
+}
+
+void			Graph::check_input()
+{
+	// faire un par un tous les statements en registrant dans un vector le resultat attendu. Si un statemen envoie un résultat oposé après calcul INCONHERENCE
+	std::string allFacts = "ABCD";
+	std::vector<std::string>	data;
+	while (allFacts.size())
+	{
+		data.push_back(input.substr(0 ,1));
+		//std::cout << input[0] << std::endl;
+		combinaison_fact(input, data);
+		input.erase(0,1);
+	}
+
+	for (int a = 0; a < data.size(); ++a)
+	{
+		std::cout << data[a] << std::endl;
+		check_case();
+	}
+	return 0;
 }
