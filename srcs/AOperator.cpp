@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 18:58:11 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:36:52 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,22 @@ bool 	And::compare()
 	bool	a = false;
 	bool	b = false;
 
-	if (this->_prev_facts[0])
-		a = this->_prev_facts[0].calc();
-	if (this->_prev_facts[1])
-		b = this->_prev_facts[1].calc();
-	else
-		b = this->_prev_op.compare();
-	return (a && b);
+	switch (_op.size())
+	{
+		case 0:
+			a = _facts[0]->calc();
+			b = _facts[1]->calc();
+			break ;
+		case 1:
+			a = _facts[0]->calc();
+			b = _op[0]->compare();
+			break ;
+		default:
+			a = _op[0]->compare();
+			b = _op[1]->compare();
+			break ;
+	}
+	return (a & b);
 }
 
 Or::Or(char *liaison, Fact *parent)
@@ -60,13 +69,22 @@ bool	Or::compare()
 	bool	a = false;
 	bool	b = false;
 
-	if (this->_prev_facts[0])
-		a = this->_prev_facts[0].calc();
-	if (this->_prev_facts[1])
-		b = this->_prev_facts[1].calc();
-	else
-		b = this->_prev_op.compare();
-	return (a || b);
+	switch (_op.size())
+	{
+		case 0:
+			a = _facts[0]->calc();
+			b = _facts[1]->calc();
+			break ;
+		case 1:
+			a = _facts[0]->calc();
+			b = _op[0]->compare();
+			break ;
+		default:
+			a = _op[0]->compare();
+			b = _op[1]->compare();
+			break ;
+	}
+	return (a | b);
 }
 
 Xor::Xor(char *liaison, Fact *parent)
@@ -82,12 +100,21 @@ bool 	Xor::compare()
 	bool	a = false;
 	bool	b = false;
 
-	if (this->_prev_facts[0])
-		a = this->_prev_facts[0].calc();
-	if (this->_prev_facts[1])
-		b = this->_prev_facts[1].calc();
-	else
-		b = this->_prev_op.compare();
+	switch (_op.size())
+	{
+		case 0:
+			a = _facts[0]->calc();
+			b = _facts[1]->calc();
+			break ;
+		case 1:
+			a = _facts[0]->calc();
+			b = _op[0]->compare();
+			break ;
+		default:
+			a = _op[0]->compare();
+			b = _op[1]->compare();
+			break ;
+	}
 	return (a ^ b);
 }
 
@@ -95,24 +122,36 @@ bool 	Xor::compare()
 
 Egal::Egal(char *liaison, Fact *parent)
 {
-
 }
 
 Egal::~Egal(void) {}
 
 bool 	Egal::compare()
 {
-	return (this->_prev_facts[0].calc());
+	bool	res;
+
+	switch (_op.size())
+	{
+		case 0:
+			return (!this->_facts[0].calc());
+		case 1:
+			return (!this->_op[0].calc());
+	}
 }
 
-Not::Not(char *liaison, Fact *parent)
+Not::Not(char *liaison)
 {
-
 }
 
 Not::~Not(void) {}
 
 bool 	Not::compare()
 {
-	return (!this->_prev_facts[0].calc());
+	switch (_op.size())
+	{
+		case 0:
+			return (!this->_facts[0].calc());
+		case 1:
+			return (!this->_op[0].calc());
+	}
 }

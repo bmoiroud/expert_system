@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 17:06:31 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:35:31 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,13 @@ Fact::~Fact()
 
 bool	Fact::calc(void)
 {
-	std::vector<>
+	if (_state == true)
+		return (true);
+	for (int a = 0; a < _prev.size(); ++a)
+	{
+		if (_prev[a].compare() == true)
+			return (true);
+	}
 	_prev.clear();
 }
 

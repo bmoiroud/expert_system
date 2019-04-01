@@ -6,11 +6,13 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 17:06:17 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 17:48:05 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "graph.hpp"
+
+using namespace std;
 
 Graph::Graph(void) {}
 
@@ -65,6 +67,7 @@ static string			Graph::get_list(string type)
 
 static void				Graph::print_list()
 {
+
 }
 
 void			Graph::resolve()
@@ -72,7 +75,7 @@ void			Graph::resolve()
 
 }
 
-void			Graph::check_input()
+void			Graph::check_input(string allFacts)
 {
 	// faire un par un tous les statements en registrant dans un vector le resultat attendu. Si un statemen envoie un résultat oposé après calcul INCONHERENCE
 	std::string allFacts = "ABCD";
@@ -87,8 +90,8 @@ void			Graph::check_input()
 
 	for (int a = 0; a < data.size(); ++a)
 	{
-		std::cout << data[a] << std::endl;
-		check_case();
+		//std::cout << data[a] << std::endl;
+		check_case(data[a]);
 	}
 	return 0;
 }

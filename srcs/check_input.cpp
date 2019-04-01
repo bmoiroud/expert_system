@@ -1,3 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_input.cpp                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/04/01 16:30:14 by eferrand          #+#    #+#             */
+/*   Updated: 2019/04/01 18:21:25 by eferrand         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+using namespace std;
+
 void	list_error_input()
 {
 }
@@ -20,7 +34,12 @@ void	combinaison_fact(std::string input, std::vector<std::string> &data, std::st
 	}
 }
 
-// envoie en parametre =ABD et doit avoira accès à la liste des règles
-bool	check_case(std::string result)
+//	envoie en parametre =ABD et doit avoir accès à la liste des règles
+//	return la valeur de la condition
+
+bool	check_case(string case)
 {
+	for (all_rules)
+	{
+	}
 }

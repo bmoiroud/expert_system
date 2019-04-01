@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/28 17:07:13 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 18:02:53 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ class		Graph
 
 		static int				n_facts;
 		static vector<Fact*>	facts;
+		bool					test;
 };
 
 #endif
