@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 17:48:05 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:39:13 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ Graph::Graph(void) {}
 
 Graph::~Graph(void) {}
 
-void		Graph::create_fact(string name)
+void			Graph::create_fact(string name)
 {
 	facts.push_back(Fact(name, false));
 }
 
-void		Graph::create_rule(vector <string> str)
+void			Graph::create_rule(vector <string> str)
 {
 	int		i;
 
@@ -33,7 +33,7 @@ void		Graph::create_rule(vector <string> str)
 	facts[get_fact_id(str[i])]->create_operator(str, i - 1);
 }
 
-bool		Graph::fact_exist(string name)
+bool			Graph::fact_exist(string name)
 {
 	int		i;
 
@@ -44,12 +44,12 @@ bool		Graph::fact_exist(string name)
 	return (false);
 }
 
-bool		Graph::calc_fact()
+bool			Graph::calc_fact()
 {
 
 }
 
-int			Graph::get_fact_id(string name)
+int				Graph::get_fact_id(string name)
 {
 	int		i;
 
@@ -60,12 +60,12 @@ int			Graph::get_fact_id(string name)
 	return (-1);
 }
 
-static string			Graph::get_list(string type)
+static string	Graph::get_list(string type)
 {
 
 }
 
-static void				Graph::print_list()
+static void		Graph::print_list()
 {
 
 }
