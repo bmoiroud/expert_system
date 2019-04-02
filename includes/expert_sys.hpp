@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/03/29 20:28:40 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:11:13 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ bool				is_fact(char c);
 bool				is_operator(string str);
 bool				is_operator(char c);
 void				error(string line);
-int					check_truc(string line, int i, int c);
+int					check_init_req(string line, int i, int c);
 int					check_order(string line, int i, int c);
+int					check_mult_input(string line);
+bool				is_registered(char c, vector <char> facts);
 
 #endif

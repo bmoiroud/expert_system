@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 18:03:48 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/01 19:32:58 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -269,41 +269,74 @@ bool				is_registered(char c, vector <char> facts)
 	return (false);
 }
 
-void				create_facts(vector <string> lines, Graph graph)
-{
-	vector <char>	facts;
+// void				create_facts(vector <string> lines, Graph graph)
+// {
+// 	vector <char>	facts;
 
-	for(int i = 0; i < lines.size(); i++)
-		for(int j = 0; j < lines[i].size(); j++)
-			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
-			{
-				graph.create_fact(lines[i][j]);
-				facts.push_back(lines[i][j]);
-			}
-}
+// 	for(int i = 0; i < lines.size(); i++)
+// 		for(int j = 0; j < lines[i].size(); j++)
+// 			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
+// 			{
+// 				graph.create_fact(lines[i][j]);
+// 				facts.push_back(lines[i][j]);
+// 			}
+// }
 
 string				rpn(string str)
 {
-	
+	string			stack;
+	string			tmp_stack;
+	int				i = -1;
+
+	while(str[++i])
+	{
+		if (is_fact(str[i]))
+		{
+			stack.push_back(str[i]);
+			stack.push_back(' ');
+		}
+		else if (is_operator(str[i]))
+			tmp_stack.push_back(str[i]);
+		else if (str[i] == '(')
+			tmp_stack.push_back(str[i]);
+		else if (str[i] == ')')
+		{
+			while (tmp_stack[tmp_stack.length() - 1] != '(')
+			{
+				stack.push_back(tmp_stack[tmp_stack.length() - 1]);
+				stack.push_back(' ');
+				tmp_stack.pop_back();
+			}
+			if (tmp_stack[tmp_stack.length() - 1] == '(')
+				tmp_stack.pop_back();
+		}
+	}
+	while(tmp_stack.length() != 0)
+	{
+		stack.push_back(tmp_stack[tmp_stack.length() - 1]);
+		stack.push_back(' ');
+		tmp_stack.pop_back();
+	}
+	return (stack);
 }
 
 int					main(int argc, const char *argv[])
 {
 	// Graph			graph;
-	vector <string>	lines;
+	// vector <string>	lines;
 	
-	if (argc < 2)
-		cout << "usage" << endl;
-	else if (argc >= 3)
-		cout << "trop d'arg" << endl;
-	else
-	{
-		parse(argv[1], lines);
-		create_facts(lines, graph);
-		// rpn
+	// if (argc < 2)
+	// 	cout << "usage" << endl;
+	// else if (argc >= 3)
+	// 	cout << "trop d'arg" << endl;
+	// else
+	// {
+		// parse(argv[1], lines);
+		// create_facts(lines, graph);
+		cout << rpn("A^B+C|D+E") << endl;
 		// split(lines)
 		// creer graphe
 		cout << "ok" << endl;
-	}
+	// }
 	return (0);
 }
