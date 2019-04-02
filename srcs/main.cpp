@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:32:58 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/02 16:47:30 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -295,7 +295,7 @@ string				rpn(string str)
 			stack.push_back(str[i]);
 			stack.push_back(' ');
 		}
-		else if (is_operator(str[i]))
+		else if (is_operator(str[i]) || str[i] == '!')
 			tmp_stack.push_back(str[i]);
 		else if (str[i] == '(')
 			tmp_stack.push_back(str[i]);
@@ -320,6 +320,79 @@ string				rpn(string str)
 	return (stack);
 }
 
+int					find_term(const string str, int i, bool next = true)
+{
+	bool			par_term;
+	int				j;
+	int				par_n1;
+	int				par_n2;
+
+	j = next ? 1 : -1;
+	par_n1 = 1;
+	par_n2 = 0;
+	par_term = false;
+	while((i += j) < str.length())
+	{
+		cout << i << endl;
+		if (i > 100)
+			exit(EXIT_FAILURE);
+		while (str[i] == ' ' || str[i] == '\t')
+			i += j;
+		if (!par_term && is_fact(str[i]))
+			return (i + j);
+		else
+			par_term = true;
+		if (par_term)
+		{
+			while(str[i] != next ? '(' : ')')
+				i += j;
+			while(par_n1 != par_n2 && str[(i += j)])
+				if (str[i] == '(')
+					next ? par_n1++ : par_n2++;
+				else if (str[i] == ')')
+					next ? par_n2++ : par_n1++;
+			if (str[i])
+				return (i + ((str[i] == '(' || str[i] == ')') ? j : 0));
+		}		
+	}
+	return (i);
+}
+
+string				add_par(string str)
+{
+	string			str2;
+	string			op = "+|^";
+	int				i;
+	int				j;
+	int				prev;
+	int				next;
+
+	prev = 0;
+	next = 0;
+	i = -1;
+	while(op[++i])	
+	{
+		j = -1;
+		while(str[++j])
+		{
+			if (str[j] == '(')
+				while(str[j - 1] != ')')
+					j++;
+			else if (str[j] == op[i])
+			{
+				cout << "1" << endl;
+				prev = find_term(str, j, false);
+				// cout << "2" << j << endl;
+				str[prev] == '!' ? prev-- : 0;
+				next = find_term(str, j, true);
+				str.insert(prev, '(', 1);
+				str.insert(next, ')', 1);
+			}
+		}
+	}
+	return (str2);
+}
+
 int					main(int argc, const char *argv[])
 {
 	// Graph			graph;
@@ -333,7 +406,9 @@ int					main(int argc, const char *argv[])
 	// {
 		// parse(argv[1], lines);
 		// create_facts(lines, graph);
-		cout << rpn("A^B+C|D+E") << endl;
+		cout << "A^B+C|D+E = " << add_par("A^B+C|D+E") << "\tvoulu = (A^((B+C)|(D+E)))";
+		cout << "A^B+C|D+E = " << rpn("A^B+C|D+E") << endl;
+		cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
 		// split(lines)
 		// creer graphe
 		cout << "ok" << endl;
