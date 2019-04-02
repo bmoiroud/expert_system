@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 17:02:30 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:06:00 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -225,10 +225,11 @@ int					check_mult_input(string line)
 	return (0);
 }
 
-vector <string>		parse(const char *filename, vector <string> lines)
+vector <string>		parse(const char *filename)
 {
 	ifstream		file(filename);
 	string			line;
+	vector <string> lines;
 	size_t			first_char;
 	int				i;
 	int				j;
@@ -237,6 +238,8 @@ vector <string>		parse(const char *filename, vector <string> lines)
 	k = 0;
 	while (getline(file, line))
 	{
+		if (parametre_inacceptable(line) == -1)
+			error(line);
 		first_char = line.find_first_not_of(" \t\n");
 		if (line.length() > first_char && line[first_char] != '#')
 		{
@@ -298,7 +301,6 @@ string				rpn(string str)
 		if (is_fact(str[i]))
 		{
 			stack.push_back(str[i]);
-			stack.push_back(' ');
 		}
 		else if (is_operator(str[i]) || str[i] == '!')
 			tmp_stack.push_back(str[i]);
@@ -309,7 +311,6 @@ string				rpn(string str)
 			while (tmp_stack[tmp_stack.length() - 1] != '(')
 			{
 				stack.push_back(tmp_stack[tmp_stack.length() - 1]);
-				stack.push_back(' ');
 				tmp_stack.pop_back();
 			}
 			if (tmp_stack[tmp_stack.length() - 1] == '(')
@@ -319,7 +320,6 @@ string				rpn(string str)
 	while(tmp_stack.length() != 0)
 	{
 		stack.push_back(tmp_stack[tmp_stack.length() - 1]);
-		stack.push_back(' ');
 		tmp_stack.pop_back();
 	}
 	return (stack);
@@ -336,27 +336,32 @@ int					find_term(const string str, int i, bool next = true)
 	par_n1 = 1;
 	par_n2 = 0;
 	par_term = false;
-	cout << str.length() << endl;
 	while((i += j) < str.length())
 	{
-		cout << i << endl;
 		if (i > 100)
 			exit(EXIT_FAILURE);
 		while (str[i] == ' ' || str[i] == '\t')
 			i += j;
 		if (!par_term && is_fact(str[i]))
-			return (i + j);
+			return (i);
 		else
 			par_term = true;
 		if (par_term)
 		{
-			while(str[i] != next ? '(' : ')')
+			cout << 2 << endl;
+			while(str[i] != (next ? '(' : ')'))
+			{
+				cout << i << endl;
 				i += j;
-			while(par_n1 != par_n2 && str[(i += j)])
-				if (str[i] == '(')
-					next ? par_n1++ : par_n2++;
-				else if (str[i] == ')')
-					next ? par_n2++ : par_n1++;
+			}
+			if (str[i])
+				while(par_n1 != par_n2 && str[(i += j)])
+				{
+					if (str[i] == '(')
+						next ? par_n1++ : par_n2++;
+					else if (str[i] == ')')
+						next ? par_n2++ : par_n1++;
+				}
 			if (str[i])
 				return (i + ((str[i] == '(' || str[i] == ')') ? j : 0));
 		}		
@@ -380,23 +385,43 @@ string				add_par(string str)
 	{
 		j = -1;
 		while(str[++j])
-		{
+		{ 
+			// cout << 2 << endl;
+			// cout << "str[j]: " << str[j] << "\tj: " << j << "\top: " << op[i] << endl;
+			// cout << op[i] << endl;
 			if (str[j] == '(')
 				while(str[j - 1] != ')')
 					j++;
-			else if (str[j] == op[i])
+			cout << str[j] << endl;
+			if (str[j] == op[i])
 			{
-				cout << "1" << endl;
+				cout << "op[i] |" << op[i] << "|" << endl;
+				// cout << "j = " << j << endl;
+				// cout << 3 << endl;
 				prev = find_term(str, j, false);
+				cout << "prev: " << prev << "\tprev + 1:" << prev + 1 << endl;
 				// cout << "2" << j << endl;
-				str[prev] == '!' ? prev-- : 0;
+				(prev > 0 && str[prev] == '!') ? prev-- : 0;
 				next = find_term(str, j, true);
-				str.insert(prev, '(', 1);
-				str.insert(next, ')', 1);
+				cout << "next: " << next << "\tnext + 1:" << next + 1 << endl;
+				str.insert(next + (next != str.length() ? 1 : 0), " ) ");
+				str.insert(prev, " ( ");
+				cout << 3 << endl;
+				j = next + 2;
+				// cout << str << endl << endl;
+				cout << 3 << endl;
 			}
+			// cout << 1 << endl;
 		}
 	}
-	return (str2);
+	return (str);
+}
+
+int					parametre_inacceptable(string line)
+{
+	if ((line.find('|') != string::npos || line.find('^') != string::npos) && line.find("<=>") != string::npos)
+		return (-1);
+	return (0);
 }
 
 int					main(int argc, const char *argv[])
@@ -410,11 +435,15 @@ int					main(int argc, const char *argv[])
 	// 	cout << "trop d'arg" << endl;
 	// else
 	// {
-		// parse(argv[1], lines);
+		// lines = parse(argv[1]);
 		// create_facts(lines, graph);
-		// cout << "A^B+C|D+E = " << add_par("A^B+C|D+E") << "\tvoulu = (A^((B+C)|(D+E)))";
-		cout << "A^B+C|D+E = " << rpn("=ABC") << endl;
-		cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
+		cout << "A^B+C|D+E = " << add_par("A^B+C|D+E") << "\tvoulu = (A^((B+C)|(D+E)))";
+		// separer condition / conclusion
+		// ajout par
+		// rpn
+		// tout stocker dans vecteur de string
+		// cout << "A^B+C|D+E = " << rpn("A + B + C => D") << endl;
+		// cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
 		// split(lines)
 		// creer graphe
 		cout << "ok" << endl;
