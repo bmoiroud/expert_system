@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 19:10:05 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:29:27 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ using namespace std;
 // a quel moment le parametre est clear ?
 Graph::Graph(vector<string> data)
 {
-	vector<string>	rules; // condition suivi de conclusion
+	vector<string>	rules; // condition suivi de conclusion en boucle
 
 	int		a = -1;
 	int		b = -1;
@@ -29,9 +29,9 @@ Graph::Graph(vector<string> data)
 				create_fact(data[a][b], (data[data.size() - 3].find(data[a][b]) != string::npos ? true : false));
 
 	//	recuperer les facts a trouver
-	data.back.erase(0, 1);
-	to_find = data.back();
-	data.pop_back();
+	to_find = data.back().substr(1);
+	data.pop_back(); // suppression ?ABC
+	data.pop_back(); //	suppression =ABC
 
 	//	enregistrer les regles
 	a = -1;
@@ -39,12 +39,17 @@ Graph::Graph(vector<string> data)
 	{
 		if (data[a].find("<=>") != string::npos)
 		{
-			rules.push_back(data[a - 1]);
 			rules.push_back(data[a].substr(3));
+			rules.push_back(data[a].substr(3));
+			rules.push_back(data[a - 1]);
 		}
-		else
+		else if (data[a].find("=>"))
 			rules.push_back(data[a].substr(2));
+		else
+			rules.push_back(data[a].substr());
 	}
+
+	//	remplissage des facts regles
 }
 
 Graph::~Graph(void)
