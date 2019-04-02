@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:11:13 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:51:56 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 
 using namespace std;
 
-vector <string>		parse(const char *filename, vector <string> lines);
+vector <string>		parse(const char *filename);
 vector <string>		strsplit(string str);
 string				trim(string str);
 string				remove_comment(string str);
@@ -37,5 +37,7 @@ int					check_init_req(string line, int i, int c);
 int					check_order(string line, int i, int c);
 int					check_mult_input(string line);
 bool				is_registered(char c, vector <char> facts);
+int					find_term(const string str, int i, bool next);
+int					parametre_inacceptable(string line);
 
 #endif
