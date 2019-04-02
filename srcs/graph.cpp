@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 21:46:02 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/02 19:10:05 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,38 @@
 
 using namespace std;
 
-Graph::Graph(void) {}
+// a quel moment le parametre est clear ?
+Graph::Graph(vector<string> data)
+{
+	vector<string>	rules; // condition suivi de conclusion
+
+	int		a = -1;
+	int		b = -1;
+
+	//	creer tous les facts avec la bonne valeur
+	while (++a < data.size() && (b = -1))
+		while (++b < data[a].size())
+			if ('A' <= data[a][b] && data[a][b] <= 'Z' && get_fact_id(data[a][b]) == -1)
+				create_fact(data[a][b], (data[data.size() - 3].find(data[a][b]) != string::npos ? true : false));
+
+	//	recuperer les facts a trouver
+	data.back.erase(0, 1);
+	to_find = data.back();
+	data.pop_back();
+
+	//	enregistrer les regles
+	a = -1;
+	while (++a < data.size())
+	{
+		if (data[a].find("<=>") != string::npos)
+		{
+			rules.push_back(data[a - 1]);
+			rules.push_back(data[a].substr(3));
+		}
+		else
+			rules.push_back(data[a].substr(2));
+	}
+}
 
 Graph::~Graph(void)
 {
@@ -81,19 +112,19 @@ void			Graph::resolve()
 void			Graph::check_input(string allFacts)
 {
 	// faire un par un tous les statements en registrant dans un vector le resultat attendu. Si un statemen envoie un résultat oposé après calcul INCONHERENCE
-	std::string allFacts = "ABCD";
-	std::vector<std::string>	data;
+	string allFacts = "ABCD";
+	vector<string>	data;
 	while (allFacts.size())
 	{
 		data.push_back(input.substr(0 ,1));
-		//std::cout << input[0] << std::endl;
+		//cout << input[0] << endl;
 		combinaison_fact(input, data);
 		input.erase(0,1);
 	}
 
 	for (int a = 0; a < data.size(); ++a)
 	{
-		//std::cout << data[a] << std::endl;
+		//cout << data[a] << endl;
 		check_case(data[a]);
 	}
 	return 0;
