@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 16:47:30 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/02 17:02:30 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,6 +180,11 @@ int					check_order(string line, int i, int c = 0)
 			i++;
 		return (check_order(line, i, c));
 	}
+	else if (c >= 2 && (line[i] == '|' || line[i] == '^'))
+	{
+		// cout << "else if (c >= 2 && (line[i] == '|' || line[i] == '^'))" << endl;
+		return (-1);
+	}
 	else
 	{
 		// cout << "else" << endl;
@@ -331,6 +336,7 @@ int					find_term(const string str, int i, bool next = true)
 	par_n1 = 1;
 	par_n2 = 0;
 	par_term = false;
+	cout << str.length() << endl;
 	while((i += j) < str.length())
 	{
 		cout << i << endl;
@@ -406,8 +412,8 @@ int					main(int argc, const char *argv[])
 	// {
 		// parse(argv[1], lines);
 		// create_facts(lines, graph);
-		cout << "A^B+C|D+E = " << add_par("A^B+C|D+E") << "\tvoulu = (A^((B+C)|(D+E)))";
-		cout << "A^B+C|D+E = " << rpn("A^B+C|D+E") << endl;
+		// cout << "A^B+C|D+E = " << add_par("A^B+C|D+E") << "\tvoulu = (A^((B+C)|(D+E)))";
+		cout << "A^B+C|D+E = " << rpn("=ABC") << endl;
 		cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
 		// split(lines)
 		// creer graphe
