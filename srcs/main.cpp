@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/03 16:50:15 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/03 18:35:20 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -369,15 +369,25 @@ int					find_term(const string str, int i, bool next = true)
 int					nb_term_par(string str, int i)
 {
 	int				nb_facts;
+	int				par_n1;
+	int				par_n2;
 
 	nb_facts = 0;
 	while(str[i] && str[i] != ')')
 	{
+		par_n1 = 1;
+		par_n2 = 0;
 		if (str[i] == '(')
 		{
 			nb_facts++;
-			while(str[i] != ')')
+			while(par_n1 != par_n2)
+			{
 				i++;
+				if (str[i] == '(')
+					par_n1++;
+				else if (str[i] == ')')
+					par_n2++;
+			}
 		}
 		else if (is_fact(str[i]))
 			nb_facts++;
@@ -395,6 +405,8 @@ string				add_par(string str)
 	int				j;
 	int				prev;
 	int				next;
+	int				par_n1;
+	int				par_n2;
 
 	prev = 0;
 	next = 0;
@@ -403,39 +415,48 @@ string				add_par(string str)
 	{
 		j = -1;
 		while(str[++j])
-		{ 
+		{
+			par_n1 = 1;
+			par_n2 = 0;
 			// cout << "j: " << j << " str: " << str << " str[j]: " << str[j] << endl;
 			// cout << 2 << endl;
 			// cout << "str[j]: " << str[j] << "\tj: " << j << "\top: " << op[i] << endl;
 			// cout << op[i] << endl;
 			if (str[j] == '(')
-			{
+			// {
 				// cout << 4 << endl;
 				if (nb_term_par(str, j + 1) <= 2)
 				// {
 					// cout << 5 << endl;
-					while(str[j - 1] != ')')
+					while(par_n1 != par_n2)
+					{
 						j++;
+						if (str[j] == '(')
+							par_n1++;
+						else if (str[j] == ')')
+							par_n2++;
+					}
 				// }
-			}
+			// }
 			// cout << "j: " << j << " str: " << str << " str[j]: " << str[j] << endl;
 			// cout << 1 << endl;
 			if (str[j] && str[j] == op[i])
 			{
-				cout << "j: " << j << endl;
-				cout << "op[i] |" << op[i] << "|" << endl;
+				// cout << "j: " << j << endl;
+				// cout << "op[i] |" << op[i] << "|" << endl;
 				// cout << "j = " << j << endl;
 				// cout << 3 << endl;
 				prev = find_term(str, j, false);
 				// cout << "prev: " << prev << "\tprev + 1:" << prev + 1 << endl;
 				(prev > 0 && str[prev] == '!') ? prev-- : 0;
 				next = find_term(str, j, true);
-				cout << "next: " << next << endl;
+				// cout << "next: " << next << endl;
 				// cout << 2 << endl;
-				cout << "prev: " << prev << endl;
+				// cout << "prev: " << prev << endl;
 				// cout << "str[prev]: " << str[(prev == -1) ? 0 : prev] << " str[next]: " << str[next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0)] << " str: " << str << endl;
 				str.insert(next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0), " ) ");
 				// cout << "str[prev]: " << str[(prev == -1) ? 0 : prev] << " str[next]: " << str[next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0)] << " str: " << str << endl;
+				prev += (is_operator(str[prev]) ? 1 : 0);
 				str.insert((prev == -1) ? 0 : prev, " ( ");
 				// cout << "str[prev]: " << str[prev] << " str[next]: " << str[next] << " str: " << str << endl;
 				// cout << 3 << endl;
@@ -470,9 +491,10 @@ int					main(int argc, const char *argv[])
 	// {
 		// lines = parse(argv[1]);
 		// create_facts(lines, graph);
-		// cout << add_par("(A|B+C)") << endl;
-		// cout << add_par("(A+B)+(C+D)|(E+F)") << endl;
+		cout << add_par("(A|B+C)") << endl;
+		cout << add_par("(A+B)+(C+D)|(E+F)") << endl;
 		cout << add_par("A^(B+C|D)+E") << endl;
+		cout << add_par("(A^((B+(C|D))+E))") << endl;
 		// separer condition / conclusion
 		// ajout par
 		// rpn
