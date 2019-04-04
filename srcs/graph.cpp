@@ -188,21 +188,26 @@ void					simplify_rules(vector<string> &data)
 	while (0 <= --i_rules)	// boucle pour faire toutes les règles
 		//	partir de la fin car on ajoute à la fin les nouvelles règles
 	{
-		rule = data[i_rule];
-		i_fact = -1;
-		while (++i_fact < rule.size())	//
+		if (i_rules % 2 == 1)	// si c'est une conclusion (simplifier condition ?)
 		{
-			if ('A' <= rule[i] && rule[i] <= 'Z')
+			rule = data[i_rule];
+			i_fact = -1;
+			while (++i_fact < rule.size())	//	parcourir la règle
 			{
-				i = -1;
-				while (++i < rule.size())
+				if ('A' <= rule[i] && rule[i] <= 'Z')
 				{
-				}
+					i = -1;
+					while (++i < rule.size()) // boucle de simplification (suppresion autres facts et limitation '!')
+					{
+					}
 
-				//	creer nouvelle conclusion
-				
+					//	creer nouvelle conclusion
+					data.push_backs(data[i_rules - 1]);
+					data.push_back(data[i_rules]);
+				}
 			}
+			//	supprimer la règle traitée
+			data.erase(data.begin() + i);
 		}
-		//	supprimer la règle traitée
 	}
 }
