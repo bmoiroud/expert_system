@@ -29,9 +29,10 @@ class	Fact: public Graph
 		Fact(const string name, const bool state);
 		~Fact(void);
 
+		// TODO
 		bool		calc(void);
 		bool		get_state(void);
-		void		create_operator(vector <string> str, int i);
+		void		create_operator(string condition, string conclusion);
 		bool		change_state();
 
 		string		name;

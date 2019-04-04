@@ -33,6 +33,10 @@ class		Graph
 		static void				print_list();
 		void					resolve();
 
+		//	TODO
+		void					delete_duplicate(vector<string> &data);
+		void					simplify_rules(vector<string> &data);
+
 		static int				n_facts;
 		static vector<Fact>		facts;
 		bool					test;

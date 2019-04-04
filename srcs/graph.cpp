@@ -49,7 +49,33 @@ Graph::Graph(vector<string> data)
 			rules.push_back(data[a].substr());
 	}
 
+	//	simplifier règles 
+	//	ex: A + B => !!!!C		A + B => C
+	//	A => B + C				A => B		A => C
+	simplify_rules(rules); // TODO
+
+	//	supprimer règles en doublon (! simplifier puis check doublon !)
+	delete_duplicate(rules); // TODO
+
 	//	remplissage des facts regles
+	a = 1;
+	while (a < rules.size())
+	{
+		b = -1;
+		while (++b < rules[a].size())
+		{
+			if ('A' <= rules[a][b] && rules[a][b] <= 'Z')
+				get_fact_id(rules[a][b]).create_operator(rules[a-1], rules[a]);
+			if (rules[a][b] == '|' || rules[a][b] == '^')
+			{
+				string tmp = rules[a];
+				rules.clear();
+				data.clear();
+				error(rules[a]);
+			}
+		}
+		a += 2;
+	}
 }
 
 Graph::~Graph(void)

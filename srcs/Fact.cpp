@@ -34,8 +34,9 @@ bool	Fact::calc(void)
 	}
 }
 
-void	Fact::create_operator(vector <string> str, int i)
+void	Fact::create_operator(string condition, string conclusion)
 {
+	// TODO maj
 	int		n;
 
 	while (str[i])
