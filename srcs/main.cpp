@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/03 18:35:20 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/04 18:58:10 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ vector <string>		strsplit(string str)
 		while ((str[i] == ' ' || str[i] == '\t') && str[i])
 			i++;
 	}
+	return (str2);
+}
+
+vector <string>		split(string str)
+{
+	size_t			pos;
+	vector <string>	str2;
+
+	pos = (str[(pos = str.find('=')) - 1] == '<') ? pos - 1 : pos;
+	str2.push_back(str.substr(0, pos));
+	// cout << "pos: " << pos << endl;
+	// cout << "str: " << str << endl;
+	str2.push_back(str.substr(pos, str.length()));
+	// cout << "split" << endl;
 	return (str2);
 }
 
@@ -97,7 +111,7 @@ int					check_par(string line)
 	i = -1;
 	j = 0;
 	k = 0;
-	while(line[++i])
+	while(++i < line.length())
 	{
 		(line[i] == ')') ? k++ : 0;
 		if (line[i] == '(')
@@ -173,6 +187,11 @@ int					check_order(string line, int i, int c = 0)
 		// cout << "else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])" << endl;
 		return (check_order(line, i + 2, c + ((c % 2 == 0) ? 2 : 1)));
 	}
+	else if (line[i] == '<' && line[i + 1] == '=' && line[i + 2] == '>' && line[i + 2])
+	{
+		// cout << "else if (line[i] == '<' && line[i + 1] == '=' && line[i + 2] == '>' && line[i + 2])" << endl;
+		return (check_order(line, i + 3, c + ((c % 2 == 0) ? 2 : 1)));
+	}
 	else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
 	{
 		// cout << "else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')" << endl;
@@ -238,12 +257,12 @@ vector <string>		parse(const char *filename)
 	k = 0;
 	while (getline(file, line))
 	{
-		if (parametre_inacceptable(line) == -1)
-			error(line);
 		first_char = line.find_first_not_of(" \t\n");
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
+			if (parametre_inacceptable(line) == -1)
+				error(line);
 			cout << endl << line << endl;
 			if (line[0] == '=' || line[0] == '?')
 			{
@@ -255,8 +274,8 @@ vector <string>		parse(const char *filename)
 			}
 			else if (check_order(line, 0) == -1 || check_par(line) == -1)
 				error(line);
+			lines.push_back(line);
 		}
-		lines.push_back(line);
 	}
 	if (k != 124)
 		exit(EXIT_FAILURE);
@@ -297,7 +316,6 @@ string				rpn(string str)
 	int				i = -1;
 
 	while(str[++i])
-	{
 		if (is_fact(str[i]))
 			stack.push_back(str[i]);
 		else if (is_operator(str[i]) || str[i] == '!')
@@ -312,9 +330,15 @@ string				rpn(string str)
 				tmp_stack.pop_back();
 			}
 			if (tmp_stack[tmp_stack.length() - 1] == '(')
+			{
 				tmp_stack.pop_back();
+				if (tmp_stack[tmp_stack.length() - 1] == '!')
+				{
+					stack.push_back(tmp_stack[tmp_stack.length() - 1]);
+					tmp_stack.pop_back();
+				}
+			}
 		}
-	}
 	while(tmp_stack.length() != 0)
 	{
 		stack.push_back(tmp_stack[tmp_stack.length() - 1]);
@@ -336,19 +360,18 @@ int					find_term(const string str, int i, bool next = true)
 	par_term = false;
 	while((i += j) < str.length())
 	{
-		if (i > 100)
-			exit(EXIT_FAILURE);
 		while (str[i] == ' ' || str[i] == '\t')
 			i += j;
+		// cout << str[i] << endl;
 		if (!par_term && is_fact(str[i]))
 			return (i);
-		else
+		else if (str[i] != '!' && str[i + 1] != '(')
 			par_term = true;
 		if (par_term)
 		{
 			while(str[i] != (next ? '(' : ')'))
 			{
-				cout << i << endl;
+				// cout << "find term i: " << i << endl;
 				i += j;
 			}
 			if (str[i])
@@ -400,7 +423,7 @@ int					nb_term_par(string str, int i)
 string				add_par(string str)
 {
 	string			str2;
-	string			op = "+|^";
+	string			op = "!+|^";
 	int				i;
 	int				j;
 	int				prev;
@@ -446,7 +469,10 @@ string				add_par(string str)
 				// cout << "op[i] |" << op[i] << "|" << endl;
 				// cout << "j = " << j << endl;
 				// cout << 3 << endl;
-				prev = find_term(str, j, false);
+				if (op[i] != '!')
+					prev = find_term(str, j, false);
+				else
+					prev = j;
 				// cout << "prev: " << prev << "\tprev + 1:" << prev + 1 << endl;
 				(prev > 0 && str[prev] == '!') ? prev-- : 0;
 				next = find_term(str, j, true);
@@ -474,36 +500,70 @@ string				add_par(string str)
 int					parametre_inacceptable(string line)
 {
 	if ((line.find('|') != string::npos || line.find('^') != string::npos) && line.find("<=>") != string::npos)
+	{
+		cout << "deviance detectee" << endl;
 		return (-1);
+	}
 	return (0);
 }
 
 int					main(int argc, const char *argv[])
 {
 	// Graph			graph;
-	// vector <string>	lines;
+	vector <string>	lines;
+	vector <string>	tmp;
+	vector <string>	parsed_lines;
+	int				i;
 	
-	// if (argc < 2)
-	// 	cout << "usage" << endl;
-	// else if (argc >= 3)
-	// 	cout << "trop d'arg" << endl;
-	// else
-	// {
-		// lines = parse(argv[1]);
+	// cout << "!!A+B+!C" << endl << endl;
+	// cout << rpn(add_par("!A+B+!C")) << endl;
+	// cout << rpn(split(add_par(" ( A 	+ B ) => C"))[0]) << '|' << endl;
+	// cout << rpn(split(add_par(" ( A 	+ B ) => C"))[1]) << '|' << endl;
+	i = -1;
+	if (argc < 2)
+		cout << "usage" << endl;
+	else if (argc >= 3)
+		cout << "trop d'arg" << endl;
+	else
+	{
+		lines = parse(argv[1]);
 		// create_facts(lines, graph);
-		cout << add_par("(A|B+C)") << endl;
-		cout << add_par("(A+B)+(C+D)|(E+F)") << endl;
-		cout << add_par("A^(B+C|D)+E") << endl;
-		cout << add_par("(A^((B+(C|D))+E))") << endl;
-		// separer condition / conclusion
-		// ajout par
-		// rpn
-		// tout stocker dans vecteur de string
+		// cout << add_par("(A|B+(C))") << "|"<< endl;
+		// cout << add_par("(A|B+C)") << "|"<< endl;
+		// cout << add_par("(A+B)+(C+D)|(E+F)") << "|"<< endl;
+		// cout << add_par("A^(B+C|D)+E") << "|"<< endl;
+		// cout << add_par("A^B+!(C|D)+E") << endl;
+		while (++i < lines.size())
+		{
+			// cout << "str: " << lines[i] << " i: " << i << endl;
+			// ajout par
+			// separer condition / conclusion
+			// rpn
+			// tout stocker dans vecteur de string
+			if (lines[i][0] != '=' && lines[i][0] != '?')
+			{
+				// cout << "if 1" << endl;
+				tmp = split(add_par(lines[i]));
+				// cout << "split add_par" << endl;
+				parsed_lines.push_back(rpn(tmp[0]));
+				// cout << "push_back part 1" << endl;
+				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(tmp[1]));
+				// cout << "push_back part 2" << endl;
+			}
+			else if (lines[i][0] == '=')
+			{
+				parsed_lines.push_back(lines[i]);
+				parsed_lines.push_back(lines[i + ((lines[i + 1][0] == '?') ? 1 : -1)]);
+			}
+		}
+		i = -1;
+		while(++i < parsed_lines.size())
+			cout << ((i % 2 == 1) ? "conclusion : " : "condition : ") << parsed_lines[i] << endl;
 		// cout << "A^B+C|D+E = " << rpn("A + B + C => D") << endl;
 		// cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
 		// split(lines)
 		// creer graphe
 		// cout << "ok" << endl;
-	// }
+	}
 	return (0);
 }
