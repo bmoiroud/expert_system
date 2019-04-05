@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/04 18:58:10 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/05 15:54:56 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,14 +172,22 @@ int					check_order(string line, int i, int c = 0)
 		// cout << "else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)" << endl;
 		return (check_order(line, i + 1, c + 1));
 	}
+	else if (c >= 2 && (line[i] == '|' || line[i] == '^'))
+	{
+		// cout << "else if (c >= 2 && (line[i] == '|' || line[i] == '^'))" << endl;
+		return (-1);
+	}
 	else if (c % 2 == 1 && is_operator(line[i]))
 	{
 		// cout << "else if (c % 2 == 1 && is_operator(line[i]))" << endl;
+
 		return (check_order(line, i + 1, c - 1));
 	}
 	else if (c % 2 == 0 && line[i] == '!')
 	{
 		// cout << "else if (c % 2 == 0 && line[i] == '!')" << endl;
+		while(line[i] == '!')
+			i++;
 		return (check_order(line, i + 1, c));
 	}
 	else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])
@@ -198,11 +206,6 @@ int					check_order(string line, int i, int c = 0)
 		while(line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
 			i++;
 		return (check_order(line, i, c));
-	}
-	else if (c >= 2 && (line[i] == '|' || line[i] == '^'))
-	{
-		// cout << "else if (c >= 2 && (line[i] == '|' || line[i] == '^'))" << endl;
-		return (-1);
 	}
 	else
 	{
@@ -263,7 +266,7 @@ vector <string>		parse(const char *filename)
 			line = trim(remove_comment(line));
 			if (parametre_inacceptable(line) == -1)
 				error(line);
-			cout << endl << line << endl;
+			// cout << endl << line << endl;
 			if (line[0] == '=' || line[0] == '?')
 			{
 				k += line[0];
@@ -278,7 +281,11 @@ vector <string>		parse(const char *filename)
 		}
 	}
 	if (k != 124)
+	{
+		cout << "pas bon" << endl;
 		exit(EXIT_FAILURE);
+	}
+	cout << 1 << endl;
 	return (lines);
 }
 
@@ -500,10 +507,7 @@ string				add_par(string str)
 int					parametre_inacceptable(string line)
 {
 	if ((line.find('|') != string::npos || line.find('^') != string::npos) && line.find("<=>") != string::npos)
-	{
-		cout << "deviance detectee" << endl;
 		return (-1);
-	}
 	return (0);
 }
 
@@ -542,18 +546,24 @@ int					main(int argc, const char *argv[])
 			// tout stocker dans vecteur de string
 			if (lines[i][0] != '=' && lines[i][0] != '?')
 			{
-				// cout << "if 1" << endl;
-				tmp = split(add_par(lines[i]));
-				// cout << "split add_par" << endl;
-				parsed_lines.push_back(rpn(tmp[0]));
-				// cout << "push_back part 1" << endl;
-				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(tmp[1]));
-				// cout << "push_back part 2" << endl;
+				cout << lines[i] << endl;
+				cout << "if 1" << endl;
+				tmp = split(lines[i]);
+				cout << "split add_par" << endl;
+				parsed_lines.push_back(rpn(add_par(tmp[0])));
+				cout << "push_back part 1" << endl;
+				cout << tmp[1] << endl;
+				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(add_par(tmp[1])));
+				cout << "push_back part 2" << endl;
 			}
 			else if (lines[i][0] == '=')
 			{
+				cout << "if 2" << endl;
 				parsed_lines.push_back(lines[i]);
-				parsed_lines.push_back(lines[i + ((lines[i + 1][0] == '?') ? 1 : -1)]);
+				cout << lines[i] << endl;
+				cout << "push_back part 1" << endl;
+				parsed_lines.push_back(lines[i + ((i + 1 < lines.size() && (lines[i + 1][0] == '?')) ? 1 : -1)]);
+				cout << "push_back part 2" << endl;
 			}
 		}
 		i = -1;
