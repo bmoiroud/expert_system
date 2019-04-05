@@ -42,21 +42,30 @@ bool 	And::compare()
 	bool	a = false;
 	bool	b = false;
 
-	switch (_op.size())
+	if (_facts.size() + _op.size() == 1)
 	{
-		case 0:
+		b = true;
+		if (_facts.size() == 1)
 			a = _facts[0]->calc();
-			b = _facts[1]->calc();
-			break ;
-		case 1:
-			a = _facts[0]->calc();
-			b = _op[0]->compare();
-			break ;
-		default:
-			a = _op[0]->compare();
-			b = _op[1]->compare();
-			break ;
+		else
+			a = _op[0].calc();
 	}
+	else
+		switch (_op.size())
+		{
+			case 0:
+				a = _facts[0]->calc();
+				b = _facts[1]->calc();
+				break ;
+			case 1:
+				a = _facts[0]->calc();
+				b = _op[0].compare();
+				break ;
+			default:
+				a = _op[0].compare();
+				b = _op[1].compare();
+				break ;
+		}
 	return (a & b);
 }
 
