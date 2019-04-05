@@ -57,7 +57,7 @@ Graph::Graph(vector<string> data)
 	//	supprimer règles en doublon (! simplifier puis check doublon !)
 	delete_duplicate(rules); // TODO
 
-	//	remplissage des facts regles
+	//	remplissage des facts avec les regles
 	a = 1;
 	while (a < rules.size())
 	{
@@ -159,4 +159,55 @@ void			Graph::check_input(string allFacts)
 		check_case(data[a]);
 	}
 	return 0;
+}
+
+void					delete_duplicate(vector<string> &data)
+{
+	int	a = -1;
+	int	b;
+
+	while (++a < data.size())
+	{
+		b = a + 1;
+		while (b < data.size())
+		{
+			if (data[b] == data[a])
+				data.erase(data.begin() + b, 1);
+			++b;
+		}
+	}
+}
+
+void					simplify_rules(vector<string> &data)
+{
+	int		i_rules = data.size(); // Rien avoir avec l_ink et z_elda
+	int 	i_fact;
+	int		i;
+	string	rule;
+
+	while (0 <= --i_rules)	// boucle pour faire toutes les règles
+		//	partir de la fin car on ajoute à la fin les nouvelles règles
+	{
+		if (i_rules % 2 == 1)	// si c'est une conclusion (simplifier condition ?)
+		{
+			rule = data[i_rule];
+			i_fact = -1;
+			while (++i_fact < rule.size())	//	parcourir la règle
+			{
+				if ('A' <= rule[i] && rule[i] <= 'Z')
+				{
+					i = -1;
+					while (++i < rule.size()) // boucle de simplification (suppresion autres facts et limitation '!')
+					{
+					}
+
+					//	creer nouvelle conclusion
+					data.push_backs(data[i_rules - 1]);
+					data.push_back(data[i_rules]);
+				}
+			}
+			//	supprimer la règle traitée
+			data.erase(data.begin() + i);
+		}
+	}
 }
