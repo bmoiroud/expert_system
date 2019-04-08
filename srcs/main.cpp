@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/05 15:54:56 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/08 16:46:12 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,7 @@ vector <string>		split(string str)
 
 	pos = (str[(pos = str.find('=')) - 1] == '<') ? pos - 1 : pos;
 	str2.push_back(str.substr(0, pos));
-	// cout << "pos: " << pos << endl;
-	// cout << "str: " << str << endl;
-	str2.push_back(str.substr(pos, str.length()));
-	// cout << "split" << endl;
+	str2.push_back(str.substr(str.find('>') + 1, str.length()));
 	return (str2);
 }
 
@@ -129,7 +126,6 @@ int					check_par(string line)
 		if (j < k)
 			return (-1);
 		if (line[i] == '=' && line[i + 1] == '>')
-		{
 			if (j != k)
 				return (-1);
 			else
@@ -137,9 +133,7 @@ int					check_par(string line)
 				j = 0;
 				k = 0;
 			}
-		}
 	}
-	// cout << "j: " << j << " k: " << k << endl;
 	if (j != k)
 		return (-1);
 	return (0);
@@ -150,68 +144,40 @@ int					check_par(string line)
 	c = 1 > operateur
 	c = 2 > fait apres =>
 	c = 3 > operateur apres =>
-	c = -1 > erreur
+	return -1 > erreur
+	return 1  > ok
 */
 
 int					check_order(string line, int i, int c = 0)
 {
 	if (c > 3)
-	{
-		// cout << "if (c > 3)" << endl;
 		return ( -1);
-	}
-	else if (!line[i])
-	{
-		// cout << "else if (!line[i])" << endl;
-		if (c < 2)
-			return (-1);
-		return (1);
-	}
+	else if (!line[i] && c % 2 != 0)
+		return ((c < 2) ? -1 : 1);
 	else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)
-	{
-		// cout << "else if (c % 2 == 0 && line[i] >= 65 && line[i] <= 90)" << endl;
 		return (check_order(line, i + 1, c + 1));
-	}
 	else if (c >= 2 && (line[i] == '|' || line[i] == '^'))
-	{
-		// cout << "else if (c >= 2 && (line[i] == '|' || line[i] == '^'))" << endl;
 		return (-1);
-	}
 	else if (c % 2 == 1 && is_operator(line[i]))
-	{
-		// cout << "else if (c % 2 == 1 && is_operator(line[i]))" << endl;
-
 		return (check_order(line, i + 1, c - 1));
-	}
 	else if (c % 2 == 0 && line[i] == '!')
 	{
-		// cout << "else if (c % 2 == 0 && line[i] == '!')" << endl;
 		while(line[i] == '!')
 			i++;
-		return (check_order(line, i + 1, c));
+		return (check_order(line, i, c));
 	}
-	else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])
-	{
-		// cout << "else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2])" << endl;
+	else if (line[i] == '=' && line[i + 1] == '>' && line[i + 2] && !is_operator(line[i - 1]))
 		return (check_order(line, i + 2, c + ((c % 2 == 0) ? 2 : 1)));
-	}
 	else if (line[i] == '<' && line[i + 1] == '=' && line[i + 2] == '>' && line[i + 2])
-	{
-		// cout << "else if (line[i] == '<' && line[i + 1] == '=' && line[i + 2] == '>' && line[i + 2])" << endl;
 		return (check_order(line, i + 3, c + ((c % 2 == 0) ? 2 : 1)));
-	}
-	else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
+	else if (line[i] == '(' || (line[i] == ')' && c % 2 == 1) || line[i] == ' ' || line[i] == '\t')
 	{
-		// cout << "else if (line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')" << endl;
-		while(line[i] == '(' || line[i] == ')' || line[i] == ' ' || line[i] == '\t')
+		while(line[i] == '(' || (line[i] == ')' && c % 2 == 1) || line[i] == ' ' || line[i] == '\t')
 			i++;
 		return (check_order(line, i, c));
 	}
 	else
-	{
-		// cout << "else" << endl;
 		return (-1);
-	}
 }
 
 int					check_init_req(string line, int i, int c = 0)
@@ -260,13 +226,13 @@ vector <string>		parse(const char *filename)
 	k = 0;
 	while (getline(file, line))
 	{
+		cout << line << endl;
 		first_char = line.find_first_not_of(" \t\n");
 		if (line.length() > first_char && line[first_char] != '#')
 		{
 			line = trim(remove_comment(line));
 			if (parametre_inacceptable(line) == -1)
 				error(line);
-			// cout << endl << line << endl;
 			if (line[0] == '=' || line[0] == '?')
 			{
 				k += line[0];
@@ -285,7 +251,6 @@ vector <string>		parse(const char *filename)
 		cout << "pas bon" << endl;
 		exit(EXIT_FAILURE);
 	}
-	cout << 1 << endl;
 	return (lines);
 }
 
@@ -302,19 +267,6 @@ bool				is_registered(char c, vector <char> facts)
 			return (true);
 	return (false);
 }
-
-// void				create_facts(vector <string> lines, Graph graph)
-// {
-// 	vector <char>	facts;
-
-// 	for(int i = 0; i < lines.size(); i++)
-// 		for(int j = 0; j < lines[i].size(); j++)
-// 			if (is_fact(lines[i][j]) && !is_registered(lines[i][j], facts))
-// 			{
-// 				graph.create_fact(lines[i][j]);
-// 				facts.push_back(lines[i][j]);
-// 			}
-// }
 
 string				rpn(string str)
 {
@@ -369,7 +321,6 @@ int					find_term(const string str, int i, bool next = true)
 	{
 		while (str[i] == ' ' || str[i] == '\t')
 			i += j;
-		// cout << str[i] << endl;
 		if (!par_term && is_fact(str[i]))
 			return (i);
 		else if (str[i] != '!' && str[i + 1] != '(')
@@ -377,10 +328,7 @@ int					find_term(const string str, int i, bool next = true)
 		if (par_term)
 		{
 			while(str[i] != (next ? '(' : ')'))
-			{
-				// cout << "find term i: " << i << endl;
 				i += j;
-			}
 			if (str[i])
 				while(par_n1 != par_n2 && str[(i += j)])
 				{
@@ -423,7 +371,6 @@ int					nb_term_par(string str, int i)
 			nb_facts++;
 		i++;
 	}
-	// cout << "nb_facts: " << nb_facts << endl;
 	return (nb_facts);
 }
 
@@ -441,23 +388,15 @@ string				add_par(string str)
 	prev = 0;
 	next = 0;
 	i = -1;
-	while(op[++i])	
+	while(op[++i])
 	{
 		j = -1;
 		while(str[++j])
 		{
 			par_n1 = 1;
 			par_n2 = 0;
-			// cout << "j: " << j << " str: " << str << " str[j]: " << str[j] << endl;
-			// cout << 2 << endl;
-			// cout << "str[j]: " << str[j] << "\tj: " << j << "\top: " << op[i] << endl;
-			// cout << op[i] << endl;
-			if (str[j] == '(')
-			// {
-				// cout << 4 << endl;
+			if (str[j] == '(' && op[i] != '!')
 				if (nb_term_par(str, j + 1) <= 2)
-				// {
-					// cout << 5 << endl;
 					while(par_n1 != par_n2)
 					{
 						j++;
@@ -466,41 +405,21 @@ string				add_par(string str)
 						else if (str[j] == ')')
 							par_n2++;
 					}
-				// }
-			// }
-			// cout << "j: " << j << " str: " << str << " str[j]: " << str[j] << endl;
-			// cout << 1 << endl;
 			if (str[j] && str[j] == op[i])
 			{
-				// cout << "j: " << j << endl;
-				// cout << "op[i] |" << op[i] << "|" << endl;
-				// cout << "j = " << j << endl;
-				// cout << 3 << endl;
 				if (op[i] != '!')
 					prev = find_term(str, j, false);
 				else
 					prev = j;
-				// cout << "prev: " << prev << "\tprev + 1:" << prev + 1 << endl;
 				(prev > 0 && str[prev] == '!') ? prev-- : 0;
 				next = find_term(str, j, true);
-				// cout << "next: " << next << endl;
-				// cout << 2 << endl;
-				// cout << "prev: " << prev << endl;
-				// cout << "str[prev]: " << str[(prev == -1) ? 0 : prev] << " str[next]: " << str[next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0)] << " str: " << str << endl;
 				str.insert(next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0), " ) ");
-				// cout << "str[prev]: " << str[(prev == -1) ? 0 : prev] << " str[next]: " << str[next + ((next != str.length() && !is_operator(str[next])) ? 1 : 0)] << " str: " << str << endl;
 				prev += (is_operator(str[prev]) ? 1 : 0);
 				str.insert((prev == -1) ? 0 : prev, " ( ");
-				// cout << "str[prev]: " << str[prev] << " str[next]: " << str[next] << " str: " << str << endl;
-				// cout << 3 << endl;
-				j = next + 2;
-				// cout << str << endl << endl;
-				// cout << 3 << endl;
+				j = (op[i] == '!') ? j + 3 : next + 2;
 			}
-			// cout << 4 << endl;
 		}
 	}
-	// cout << 1 << endl;
 	return (str);
 }
 
@@ -519,10 +438,6 @@ int					main(int argc, const char *argv[])
 	vector <string>	parsed_lines;
 	int				i;
 	
-	// cout << "!!A+B+!C" << endl << endl;
-	// cout << rpn(add_par("!A+B+!C")) << endl;
-	// cout << rpn(split(add_par(" ( A 	+ B ) => C"))[0]) << '|' << endl;
-	// cout << rpn(split(add_par(" ( A 	+ B ) => C"))[1]) << '|' << endl;
 	i = -1;
 	if (argc < 2)
 		cout << "usage" << endl;
@@ -531,49 +446,23 @@ int					main(int argc, const char *argv[])
 	else
 	{
 		lines = parse(argv[1]);
-		// create_facts(lines, graph);
-		// cout << add_par("(A|B+(C))") << "|"<< endl;
-		// cout << add_par("(A|B+C)") << "|"<< endl;
-		// cout << add_par("(A+B)+(C+D)|(E+F)") << "|"<< endl;
-		// cout << add_par("A^(B+C|D)+E") << "|"<< endl;
-		// cout << add_par("A^B+!(C|D)+E") << endl;
 		while (++i < lines.size())
 		{
-			// cout << "str: " << lines[i] << " i: " << i << endl;
-			// ajout par
-			// separer condition / conclusion
-			// rpn
-			// tout stocker dans vecteur de string
 			if (lines[i][0] != '=' && lines[i][0] != '?')
 			{
-				cout << lines[i] << endl;
-				cout << "if 1" << endl;
 				tmp = split(lines[i]);
-				cout << "split add_par" << endl;
 				parsed_lines.push_back(rpn(add_par(tmp[0])));
-				cout << "push_back part 1" << endl;
-				cout << tmp[1] << endl;
 				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(add_par(tmp[1])));
-				cout << "push_back part 2" << endl;
 			}
 			else if (lines[i][0] == '=')
 			{
-				cout << "if 2" << endl;
 				parsed_lines.push_back(lines[i]);
-				cout << lines[i] << endl;
-				cout << "push_back part 1" << endl;
 				parsed_lines.push_back(lines[i + ((i + 1 < lines.size() && (lines[i + 1][0] == '?')) ? 1 : -1)]);
-				cout << "push_back part 2" << endl;
 			}
 		}
 		i = -1;
 		while(++i < parsed_lines.size())
 			cout << ((i % 2 == 1) ? "conclusion : " : "condition : ") << parsed_lines[i] << endl;
-		// cout << "A^B+C|D+E = " << rpn("A + B + C => D") << endl;
-		// cout << "(A^((B+C)|!(D+E))) = " << rpn("(A^((B+C)|!(D+E)))") << endl;
-		// split(lines)
-		// creer graphe
-		// cout << "ok" << endl;
 	}
 	return (0);
 }
