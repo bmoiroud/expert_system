@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 18:11:12 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 18:47:22 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@ Fact::Fact(const string name, const bool state)
 
 Fact::~Fact()
 {
-	_prev.clear();
+	_cond.clear();
 }
 
 bool	Fact::calc(void)
 {
 	if (_state == true)
 		return (true);
-	for (int a = 0; a < _prev.size(); ++a)
+	for (int a = 0; a < _cond.size(); ++a)
 	{
-		if (_prev[a].compare() == true)
+		if (_cond[a].compare() == true)
 			return (true);
 	}
 }
@@ -38,26 +38,26 @@ void	Fact::create_operator(string condition, string conclusion)
 {
 	int		i = 0;
 	int		n;
-	vector
 
-	// TODO maj
+	// TODO maj (date du debut du projet a refaire)
+	// partir de la fin ? la fin comprend toujours tout ?
 	while (condition[i])
 	{
-		n = this._prev.size();
+		n = this._cond.size();
 		if (condition[i] == "|")
-			this._prev.push_back(Or());
+			this._cond.push_back(Or());
 		else if (condition[i] == "+")
-			this._prev.push_back(And());
+			this._cond.push_back(And());
 		else if (condition[i] == "^")
-			this._prev.push_back(Xor());
+			this._cond.push_back(Xor());
 		else if (condition[i] == "!")
-			this._prev.push_back(Not());
+			this._cond.push_back(Not());
 		else
-			this._prev.push_back(Egal());
+			this._cond.push_back(Egal());
 		if (is_fact(condition[i - 1]))
-			this._prev[n].connect_fact(condition, i - 1);
+			this._cond[n].connect_fact(condition, i - 1);
 		else
-			this._prev[n].connect_op(condition, i - 1);
+			this._cond[n].connect_op(condition, i - 1);
 		i--;
 	}
 	// end TODO MAJ
@@ -67,9 +67,9 @@ void	Fact::create_operator(string condition, string conclusion)
 	// A=0		B=1		+=0		C=3		D=4		+=3		!=+=3	+=(!=3)(+=0)=0
 	// si notre fact est compris entre pos et zone influence alors on est concerné
 	vector<int>	all;
-	int			pos = -1;
+	int			pos = -1; // last_find of fact.name
 	int			a;
-	int			b;
+	int			count = 0;
 
 	a  = -1;
 	while (++a < conclusion.size())
@@ -77,12 +77,23 @@ void	Fact::create_operator(string condition, string conclusion)
 		all.push_back(a);
 		if (conclusion[a] == '+')
 		{
+			if (all[a - 1] < all[ all[a-1] - 1])
+				all[a] = all[a - 1];
+			else
+				all[a] = all[ all[a-1] - 1];
 		}
+		else if (conclusion[a] == '!')
+			all[a] = all[a - 1];
 	}
 
 	while ((pos = conclusion.find(name, pos + 1)) != string::npos)
 	{
+		a = pos;
+		while (++a < all.size())
+			if (conclusion[a] == '!' && all[a] <= pos)
+				++count;
 	}
+	_concl.push_back((count % 2) == 0) ;
 }
 
 bool		Fact::change_state()
@@ -90,9 +101,9 @@ bool		Fact::change_state()
 	int	a;
 
 	a = -1;
-	while (++a < _prev.size())
+	while (++a < _cond.size())
 	{
-		if (_prev[a].calc() == true)
+		if (_cond[a].calc() == true)
 		{
 		}
 	}
