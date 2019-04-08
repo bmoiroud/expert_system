@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 18:16:00 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 17:49:04 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,9 @@ class	Fact: public Graph
 		string		name;
 		
 	private:
-		bool				_state;
-		vector <AOperator>	_prev;
+		bool				_value;
+		vector <AOperator>	_cond;	//condition
+		vector <bool>		_concl;	//conclusion
 };
 
 #endif

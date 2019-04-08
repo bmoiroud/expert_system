@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 16:46:53 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 18:11:12 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 Fact::Fact(const string name, const bool state)
 {
 	this.name = name;
-	this._state = state;
+	this._value = state;
 }
 
 Fact::~Fact()
@@ -36,8 +36,6 @@ bool	Fact::calc(void)
 
 void	Fact::create_operator(string condition, string conclusion)
 {
-	// construire conlusion comme une condition puis la retourner ? (pb multi-instance ?)
-	// a chaque "!" voir [pos-1] == id_fact_in_used
 	int		i = 0;
 	int		n;
 	vector
@@ -63,26 +61,27 @@ void	Fact::create_operator(string condition, string conclusion)
 		i--;
 	}
 	// end TODO MAJ
-	vector<string>	all;
-	n = -1;
-	while (++n < conclusion.size())
+
+	// enregistrer debut zone influence de chaque caractere
+	// AB+CD+!+
+	// A=0		B=1		+=0		C=3		D=4		+=3		!=+=3	+=(!=3)(+=0)=0
+	// si notre fact est compris entre pos et zone influence alors on est concerné
+	vector<int>	all;
+	int			pos = -1;
+	int			a;
+	int			b;
+
+	a  = -1;
+	while (++a < conclusion.size())
 	{
-		all.push_back( string(1, conclusion[n]) )
-		if (conclusion[n] == '+')
+		all.push_back(a);
+		if (conclusion[a] == '+')
 		{
-			i = n;
-			while (0 < --i && all[n].size() < 3)
-			{
+		}
+	}
 
-			}
-		}
-		else if (conclusion[n] == '!')
-		{
-		}
-		else if ('A' <= conclusion[n] && conclusion[n] <= 'Z')
-		{
-		}
-
+	while ((pos = conclusion.find(name, pos + 1)) != string::npos)
+	{
 	}
 }
 
