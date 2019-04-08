@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 19:26:48 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 15:20:04 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ class	AOperator: public Graph
 class	And: public AOperator
 {
 	public:
-		And(char *liaison);
+		And(string liaison);
 		~And(void);
 
 		virtual bool	compare();
@@ -50,7 +50,7 @@ class	And: public AOperator
 class	Or: public AOperator
 {
 	public:
-		Or(char *liaison);
+		Or(string liaison);
 		~Or(void);
 		
 		virtual bool	compare();
@@ -59,7 +59,7 @@ class	Or: public AOperator
 class	Xor: public AOperator
 {
 	public:
-		Xor(char *liaison);
+		Xor(string liaison);
 		~Xor(void);
 		
 		virtual bool	compare();
@@ -68,7 +68,7 @@ class	Xor: public AOperator
 class	Egal: public AOperator
 {
 	public:
-		Egal(char *liaison);
+		Egal(string liaison);
 		~Egal(void);
 
 		virtual bool	compare();
@@ -77,7 +77,7 @@ class	Egal: public AOperator
 class	Not: public AOperator
 {
 	public:
-		Not(char *liaison);
+		Not(string liaison);
 		~Not(void);
 
 		virtual bool	compare();

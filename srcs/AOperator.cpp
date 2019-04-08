@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/01 21:49:49 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 15:15:18 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	AOperator::connect_op(vector <string> str, int i)
 	
 }
 
-And::And(char *liaison)
+And::And(string liaison)
 {
 
 }
@@ -69,7 +69,7 @@ bool 	And::compare()
 	return (a & b);
 }
 
-Or::Or(char *liaison)
+Or::Or(string liaison)
 {
 
 }
@@ -100,7 +100,7 @@ bool	Or::compare()
 	return (a | b);
 }
 
-Xor::Xor(char *liaison)
+Xor::Xor(string liaison)
 {
 
 }
@@ -133,7 +133,7 @@ bool 	Xor::compare()
 
 
 
-Egal::Egal(char *liaison)
+Egal::Egal(string liaison)
 {
 
 }
@@ -153,7 +153,7 @@ bool 	Egal::compare()
 	}
 }
 
-Not::Not(char *liaison)
+Not::Not(string liaison)
 {
 
 }

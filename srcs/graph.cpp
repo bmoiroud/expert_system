@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 19:29:27 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/08 15:06:10 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ Graph::Graph(vector<string> data)
 	int		a = -1;
 	int		b = -1;
 
-	//	creer tous les facts avec la bonne valeur
+	//	creer tous les facts avec la bonne valeur (use =ABC)
 	while (++a < data.size() && (b = -1))
 		while (++b < data[a].size())
 			if ('A' <= data[a][b] && data[a][b] <= 'Z' && get_fact_id(data[a][b]) == -1)
