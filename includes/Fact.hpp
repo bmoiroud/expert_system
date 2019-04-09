@@ -30,7 +30,7 @@ class	Fact: public Graph
 		~Fact(void);
 
 		// TODO
-		bool		calc(void);
+		bool		calc(already_passed);
 		bool		get_state(void);
 		void		create_operator(string condition, string conclusion);
 		bool		change_state();

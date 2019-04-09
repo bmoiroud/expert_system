@@ -28,7 +28,7 @@ class	AOperator: public Graph
 		virtual AOperator::AOperator() = 0;
 		~AOperator(void);
 
-		virtual bool	compare() = 0;
+		virtual bool	compare(string already_passed) = 0;
 		/* inutile ?
 		void			connect_fact(vector <string> str, int i);
 		void			connect_op(vector <string> str, int i);
@@ -46,7 +46,7 @@ class	And: public AOperator
 		And(string liaison);
 		~And(void);
 
-		virtual bool	compare();
+		virtual bool	compare(string already_passed);
 };
 
 class	Or: public AOperator
@@ -55,7 +55,7 @@ class	Or: public AOperator
 		Or(string liaison);
 		~Or(void);
 		
-		virtual bool	compare();
+		virtual bool	compare(string already_passed);
 };
 
 class	Xor: public AOperator
@@ -64,7 +64,7 @@ class	Xor: public AOperator
 		Xor(string liaison);
 		~Xor(void);
 		
-		virtual bool	compare();
+		virtual bool	compare(string already_passed);
 };
 
 class	Egal: public AOperator
@@ -73,7 +73,7 @@ class	Egal: public AOperator
 		Egal(string liaison);
 		~Egal(void);
 
-		virtual bool	compare();
+		virtual bool	compare(string already_passed);
 };
 
 class	Not: public AOperator
@@ -82,7 +82,7 @@ class	Not: public AOperator
 		Not(string liaison);
 		~Not(void);
 
-		virtual bool	compare();
+		virtual bool	compare(string already_passed);
 };
 
 #endif

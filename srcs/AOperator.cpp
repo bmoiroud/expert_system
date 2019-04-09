@@ -62,7 +62,7 @@ And::And(string liaison)
 
 And::~And(void) {}
 
-bool 	And::compare()
+bool 	And::compare(string already_passed)
 {
 	int		i = -1;
 	bool	a = false;
@@ -76,11 +76,11 @@ bool 	And::compare()
 			break ;
 		case 1:
 			a = _facts[0]->calc();
-			b = _op[0]->compare();
+			b = _op[0]->compare(already_passed);
 			break ;
 		default:
-			a = _op[0]->compare();
-			b = _op[1]->compare();
+			a = _op[0]->compare(already_passed);
+			b = _op[1]->compare(already_passed);
 			break ;
 	}
 	return (a & b);
@@ -117,7 +117,7 @@ Or::Or(string liaison)
 
 Or::~Or(void) {}
 
-bool	Or::compare()
+bool	Or::compare(string already_passed)
 {
 	int		i = -1;
 	bool	a = false;
@@ -131,11 +131,11 @@ bool	Or::compare()
 			break ;
 		case 1:
 			a = _facts[0]->calc();
-			b = _op[0]->compare();
+			b = _op[0]->compare(already_passed);
 			break ;
 		default:
-			a = _op[0]->compare();
-			b = _op[1]->compare();
+			a = _op[0]->compare(already_passed);
+			b = _op[1]->compare(already_passed);
 			break ;
 	}
 	return (a | b);
@@ -173,7 +173,7 @@ Xor::Xor(string liaison)
 
 Xor::~Xor(void) {}
 
-bool 	Xor::compare()
+bool 	Xor::compare(string already_passed)
 {
 	int		i = -1;
 	bool	a = false;
@@ -187,11 +187,11 @@ bool 	Xor::compare()
 			break ;
 		case 1:
 			a = _facts[0]->calc();
-			b = _op[0]->compare();
+			b = _op[0]->compare(already_passed);
 			break ;
 		default:
-			a = _op[0]->compare();
-			b = _op[1]->compare();
+			a = _op[0]->compare(already_passed);
+			b = _op[1]->compare(already_passed);
 			break ;
 	}
 	return (a ^ b);
@@ -204,7 +204,7 @@ Egal::Egal(string liaison)
 
 Egal::~Egal(void) {}
 
-bool 	Egal::compare()
+bool 	Egal::compare(string already_passed)
 {
 	bool	res;
 
@@ -213,7 +213,7 @@ bool 	Egal::compare()
 		case 0:
 			return (_facts[0]->calc());
 		case 1:
-			return (_op[0]->compare());
+			return (_op[0]->compare(already_passed));
 	}
 }
 
@@ -234,13 +234,13 @@ Not::Not(string liaison)
 
 Not::~Not(void) {}
 
-bool 	Not::compare()
+bool 	Not::compare(string already_passed)
 {
 	switch (_op.size())
 	{
 		case 0:
 			return (!this->_facts[0].calc());
 		case 1:
-			return (!this->_op[0].compare());
+			return (!this->_op[0].compare(already_passed));
 	}
 }

@@ -23,13 +23,15 @@ Fact::~Fact()
 	_cond.clear();
 }
 
-bool	Fact::calc(void)
+bool	Fact::calc(string already_passed)
 {
-	if (_state == true)
+	if (already_passed.find(name) != string::npos)
+		return false;
+	if (_value == true) // faire à la fin pour checker incohérence ?
 		return (true);
 	for (int a = 0; a < _cond.size(); ++a)
 	{
-		if (_cond[a].compare() == true)
+		if (_cond[a].compare(already_passed) == true)
 			return (true);
 	}
 }
