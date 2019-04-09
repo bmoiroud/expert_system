@@ -68,8 +68,6 @@ Graph::Graph(vector<string> data)
 		}
 		a += 2;
 	}
-
-	// simplifier règles une fois le graph fini ?
 }
 
 Graph::~Graph(void)
@@ -142,7 +140,12 @@ static void		Graph::print_list()
 
 void			Graph::resolve()
 {
-
+	int 	a = -1;
+	while (++a < facts.size())
+		facts.calc("");
+	a = -1;
+	while (++a < to_find.size())
+		cout << facts[a].name << " = " << facts[a]._value << endl;
 }
 
 void			Graph::check_input(string allFacts)
