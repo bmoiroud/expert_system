@@ -29,9 +29,11 @@ class	AOperator: public Graph
 		~AOperator(void);
 
 		virtual bool	compare() = 0;
+		/* inutile ?
 		void			connect_fact(vector <string> str, int i);
 		void			connect_op(vector <string> str, int i);
-	
+		*/
+
 	private:
 		int					_type;
 		vector <Fact*>		_facts;

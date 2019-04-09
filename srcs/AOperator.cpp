@@ -18,6 +18,7 @@ AOperator::~AOperator(void)
 	_op.clear();
 }
 
+/* inutile ?
 void	AOperator::connect_fact(vector <string> str, int i)
 {
 	if (!this->graph.fact_exist(str[i]))
@@ -28,6 +29,7 @@ void	AOperator::connect_op(vector <string> str, int i)
 {
 	
 }
+*/
 
 And::And(string liaison)
 {
@@ -111,7 +113,6 @@ Or::Or(string liaison)
 		_op.push_back(Or(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
 	else if (c == '^')                                                 
 		_op.push_back(Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
-
 }
 
 Or::~Or(void) {}
@@ -210,9 +211,9 @@ bool 	Egal::compare()
 	switch (_op.size())
 	{
 		case 0:
-			return (!this->_facts[0]->calc());
+			return (_facts[0]->calc());
 		case 1:
-			return (!this->_op[0]->calc());
+			return (_op[0]->compare());
 	}
 }
 
@@ -240,6 +241,6 @@ bool 	Not::compare()
 		case 0:
 			return (!this->_facts[0].calc());
 		case 1:
-			return (!this->_op[0].calc());
+			return (!this->_op[0].compare());
 	}
 }
