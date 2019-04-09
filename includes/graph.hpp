@@ -29,6 +29,7 @@ class		Graph
 		bool					fact_exist(string name);
 		bool					calc_fact(string name);
 		static int				get_fact_id(string name);
+		static int				get_fact_id(char name);
 		static string			get_list(string type);
 		static void				print_list();
 		void					resolve();

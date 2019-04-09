@@ -35,7 +35,7 @@ class	AOperator: public Graph
 	private:
 		int					_type;
 		vector <Fact*>		_facts;
-		vector <AOperator>	_op;
+		vector <AOperator*>	_op;
 };
 
 class	And: public AOperator

@@ -31,7 +31,31 @@ void	AOperator::connect_op(vector <string> str, int i)
 
 And::And(string liaison)
 {
-
+	vector<int>	all;
+	get_influence(liaison, all);
+	char	c = liaison[all.size() - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '+')
+		_op.push_back(And(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '|')
+		_op.push_back(Or(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '^')
+		_op.push_back(Xor(liaison.substr(all[all.size() - 1], all.size() -2)));
+	
+	c = liaison[all[all.size() - 1] - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '+')                                                 
+		_op.push_back(And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '|')                                                 
+		_op.push_back(Or(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '^')                                                 
+		_op.push_back(Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
 }
 
 And::~And(void) {}
@@ -42,35 +66,51 @@ bool 	And::compare()
 	bool	a = false;
 	bool	b = false;
 
-	if (_facts.size() + _op.size() == 1)
+	switch (_op.size())
 	{
-		b = true;
-		if (_facts.size() == 1)
+		case 0:
 			a = _facts[0]->calc();
-		else
-			a = _op[0].calc();
+			b = _facts[1]->calc();
+			break ;
+		case 1:
+			a = _facts[0]->calc();
+			b = _op[0]->compare();
+			break ;
+		default:
+			a = _op[0]->compare();
+			b = _op[1]->compare();
+			break ;
 	}
-	else
-		switch (_op.size())
-		{
-			case 0:
-				a = _facts[0]->calc();
-				b = _facts[1]->calc();
-				break ;
-			case 1:
-				a = _facts[0]->calc();
-				b = _op[0].compare();
-				break ;
-			default:
-				a = _op[0].compare();
-				b = _op[1].compare();
-				break ;
-		}
 	return (a & b);
 }
 
 Or::Or(string liaison)
 {
+	vector<int>	all;
+	get_influence(liaison, all);
+	char	c = liaison[all.size() - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '+')
+		_op.push_back(And(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '|')
+		_op.push_back(Or(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '^')
+		_op.push_back(Xor(liaison.substr(all[all.size() - 1], all.size() -2)));
+	
+	c = liaison[all[all.size() - 1] - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '+')                                                 
+		_op.push_back(And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '|')                                                 
+		_op.push_back(Or(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '^')                                                 
+		_op.push_back(Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
 
 }
 
@@ -102,6 +142,31 @@ bool	Or::compare()
 
 Xor::Xor(string liaison)
 {
+	vector<int>	all;
+	get_influence(liaison, all);
+	char	c = liaison[all.size() - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '+')
+		_op.push_back(And(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '|')
+		_op.push_back(Or(liaison.substr(all[all.size() - 1], all.size() -2)));
+	else if (c == '^')
+		_op.push_back(Xor(liaison.substr(all[all.size() - 1], all.size() -2)));
+	
+	c = liaison[all[all.size() - 1] - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '+')                                                 
+		_op.push_back(And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '|')                                                 
+		_op.push_back(Or(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
+	else if (c == '^')                                                 
+		_op.push_back(Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1)));
 
 }
 
@@ -131,11 +196,9 @@ bool 	Xor::compare()
 	return (a ^ b);
 }
 
-
-
 Egal::Egal(string liaison)
 {
-
+	_fact.push_back(&facts[get_fact_id(liaison)]);
 }
 
 Egal::~Egal(void) {}
@@ -147,15 +210,25 @@ bool 	Egal::compare()
 	switch (_op.size())
 	{
 		case 0:
-			return (!this->_facts[0].calc());
+			return (!this->_facts[0]->calc());
 		case 1:
-			return (!this->_op[0].calc());
+			return (!this->_op[0]->calc());
 	}
 }
 
 Not::Not(string liaison)
 {
-
+	char	c = liaison[liason.size() - 1];
+	if ('A' <= c && c <= 'Z')
+		_fact.push_back(&facts[get_fact_id(c)]);
+	else if (c == '!')
+		_op.push_back(Not(0, liaison.size() - 2));
+	else if (c == '+')
+		_op.push_back(And(0, liaison.size() - 2));
+	else if (c == '|')
+		_op.push_back(Or(0, liaison.size() - 2));
+	else if (c == '^')
+		_op.push_back(Xor(0, liaison.size() - 2));
 }
 
 Not::~Not(void) {}

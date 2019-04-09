@@ -119,6 +119,17 @@ int				Graph::get_fact_id(string name)
 	return (-1);
 }
 
+int				Graph::get_fact_id(char name)
+{
+	int		i;
+
+	i = -1;
+	while (++i < n_facts)
+		if (facts[i].name == string(1, name))
+			return (i);
+	return (-1);
+}
+
 static string	Graph::get_list(string type)
 {
 

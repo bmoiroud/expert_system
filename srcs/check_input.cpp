@@ -44,3 +44,29 @@ bool	check_case(string a_case)
 	{
 	}
 }
+
+//	Enregistrer debut zone influence de chaque caractere
+//	AB+CD+!+
+//	A=0		B=1		+=0		C=3		D=4		+=3		!=+=3	+=(!=3)(+=0)=0
+//	Si notre fact est compris entre pos et zone influence alors on est concerné
+void	get_influence(string str, vector<int> &all)
+{
+	int			pos = -1; // last_find of fact.name
+	int			a;
+	int			count = 0;
+
+	a  = -1;
+	while (++a < str.size())
+	{
+		all.push_back(a);
+		if (str[a] == '+' || str[a] == '^' || str[a] == '|')
+		{
+			if (all[a - 1] < all[ all[a-1] - 1])
+				all[a] = all[a - 1];
+			else
+				all[a] = all[ all[a-1] - 1];
+		}
+		else if (str[a] == '!')
+			all[a] = all[a - 1];
+	}
+}
