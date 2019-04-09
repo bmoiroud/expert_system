@@ -16,10 +16,7 @@
 # include <iostream>
 # include <string>
 # include <vector>
-
-# include "Graph.hpp"
-# include "AOperator.hpp"
-# include "State.hpp"
+# include <Graph.hpp>
 
 using namespace std;
 
@@ -30,7 +27,7 @@ class	Fact: public Graph
 		~Fact(void);
 
 		// TODO
-		bool		calc(already_passed);
+		bool		calc(string already_passed);
 		bool		get_state(void);
 		void		create_operator(string condition, string conclusion);
 		bool		change_state();

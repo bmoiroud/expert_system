@@ -13,15 +13,16 @@
 #ifndef GRAPH_HPP
 # define GRAPH_HPP
 
-# include "node.hpp"
 # include <vector>
 
 using namespace std;
 
+class		Fact;
+
 class		Graph
 {
 	public:
-		Graph(void) = 0;
+		Graph(vector<string> data);
 		~Graph(void);
 
 		void					create_fact(string name);

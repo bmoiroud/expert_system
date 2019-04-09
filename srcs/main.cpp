@@ -432,7 +432,6 @@ int					parametre_inacceptable(string line)
 
 int					main(int argc, const char *argv[])
 {
-	// Graph			graph;
 	vector <string>	lines;
 	vector <string>	tmp;
 	vector <string>	parsed_lines;
@@ -464,5 +463,8 @@ int					main(int argc, const char *argv[])
 		while(++i < parsed_lines.size())
 			cout << ((i % 2 == 1) ? "conclusion : " : "condition : ") << parsed_lines[i] << endl;
 	}
+
+	vector<string>	data; //TODO
+	Graph			graph(data);
 	return (0);
 }

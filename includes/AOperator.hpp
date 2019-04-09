@@ -19,8 +19,7 @@
 # define	OR 3
 # define	XOR 4
 
-# include	"Graph.hpp"
-# include	"Fact.hpp"
+#include <Fact.hpp>
 
 class	AOperator: public Graph
 {
