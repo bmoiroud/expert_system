@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "expert_sys.hpp"
+
 using namespace std;
 
 void	list_error_input()
@@ -37,7 +39,6 @@ void	combinaison_fact(std::string input, std::vector<std::string> &data,
 
 //	envoie en parametre =ABD et doit avoir accès à la liste des règles
 //	return la valeur de la condition
-
 bool	check_case(string a_case)
 {
 	for (all_rules)

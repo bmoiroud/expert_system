@@ -20,6 +20,8 @@
 
 using namespace std;
 
+class	AOperator;
+
 class	Fact: public Graph
 {
 	public:
@@ -34,9 +36,9 @@ class	Fact: public Graph
 
 		string		name;
 		
-	private:
+	protected:
 		bool				_value;
-		vector <AOperator>	_cond;	//condition
+		vector <AOperator*>	_cond;	//condition
 		vector <bool>		_concl;	//conclusion
 };
 

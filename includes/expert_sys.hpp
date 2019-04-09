@@ -40,4 +40,10 @@ bool				is_registered(char c, vector <char> facts);
 int					find_term(const string str, int i, bool next);
 int					parametre_inacceptable(string line);
 
+void	list_error_input();
+void	combinaison_fact(std::string input, std::vector<std::string> &data, 
+						std::string base = "");
+bool	check_case(string a_case);
+void	get_influence(string str, vector<int> &all);
+
 #endif

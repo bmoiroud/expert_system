@@ -19,13 +19,13 @@
 # define	OR 3
 # define	XOR 4
 
-#include <Fact.hpp>
+#include "Fact.hpp"
 
 class	AOperator: public Graph
 {
 	public:
-		virtual AOperator::AOperator() = 0;
-		~AOperator(void);
+		AOperator(void) : Graph(){};
+		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;
 		/* inutile ?
@@ -33,8 +33,7 @@ class	AOperator: public Graph
 		void			connect_op(vector <string> str, int i);
 		*/
 
-	private:
-		int					_type;
+	protected:
 		vector <Fact*>		_facts;
 		vector <AOperator*>	_op;
 };

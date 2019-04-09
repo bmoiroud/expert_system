@@ -13,6 +13,7 @@
 #ifndef GRAPH_HPP
 # define GRAPH_HPP
 
+# include "expert_sys.hpp"
 # include <vector>
 
 using namespace std;
@@ -22,6 +23,7 @@ class		Fact;
 class		Graph
 {
 	public:
+		Graph();
 		Graph(vector<string> data);
 		~Graph(void);
 

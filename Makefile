@@ -21,7 +21,7 @@ OBJ_DIR			:=	./objs
 
 # files to compile
 FILE_LIST		:=	main.cpp		\
-					Aoperator.cpp	\
+					AOperator.cpp	\
 					Fact.cpp		\
 					Graph.cpp		\
 					check_input.cpp

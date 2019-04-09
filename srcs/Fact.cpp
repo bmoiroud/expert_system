@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "Fact.hpp"
+#include "AOperator.hpp"
 
-Fact::Fact(const string name, const bool state)
+Fact::Fact(const string Name, const bool state)
 {
-	this.name = name;
-	this._value = state;
+	name = Name;
+	_value = state;
 }
 
 Fact::~Fact()
@@ -31,7 +32,7 @@ bool	Fact::calc(string already_passed)
 		return (true);
 	for (int a = 0; a < _cond.size(); ++a)
 	{
-		if (_cond[a].compare(already_passed) == true)
+		if (_cond[a]->compare(already_passed) == true)
 			return (true);
 	}
 }
@@ -44,17 +45,17 @@ void	Fact::create_operator(string condition, string conclusion)
 	int			count = 0;
 
 	//condition
-	a = all.condition() - 1;
+	a = all.size() - 1;
 	if (condition[a] == '!')
-		_op.push_back(Not(condition.substr(0, a)));
+		_cond.push_back(new Not(condition.substr(0, a)));
 	else if (condition[a] == '+')
-		_op.push_back(And(condition.substr(0, a)));
+		_cond.push_back(new And(condition.substr(0, a)));
 	else if (condition[a] == '|')
-		_op.push_back(Or(condition.substr(0, a)));
+		_cond.push_back(new Or(condition.substr(0, a)));
 	else if(condition[a] == '^')
-		_op.push_back(Xor(condition.substr(0, a)));
+		_cond.push_back(new Xor(condition.substr(0, a)));
 	else
-		_op.push_back(Egal(condition));
+		_cond.push_back(new Egal(condition));
 
 	//conclusion
 	all.clear();
@@ -71,13 +72,15 @@ void	Fact::create_operator(string condition, string conclusion)
 
 bool		Fact::change_state()
 {
+	/*
 	int	a;
 
 	a = -1;
 	while (++a < _cond.size())
 	{
-		if (_cond[a].calc() == true)
+		if (_cond[a]->calc() == true)
 		{
 		}
 	}
+	*/
 }

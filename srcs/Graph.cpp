@@ -10,9 +10,13 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "graph.hpp"
+#include "Graph.hpp"
 
 using namespace std;
+
+Graph::Graph()
+{
+}
 
 // a quel moment le parametre est clear ?
 Graph::Graph(vector<string> data)
