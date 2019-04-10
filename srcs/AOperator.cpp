@@ -6,16 +6,12 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:08:53 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:15:57 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Graph.hpp"
 #include "AOperator.hpp"
-
-AOperator::AOperator(string liaison) : Graph()
-{
-}
 
 AOperator::~AOperator(void) 
 {
@@ -78,7 +74,6 @@ bool 	And::compare(string already_passed)
 }
 
 Or::Or(string liaison)
-
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -133,7 +128,6 @@ bool	Or::compare(string already_passed)
 }
 
 Xor::Xor(string liaison)
-
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -188,7 +182,6 @@ bool 	Xor::compare(string already_passed)
 }
 
 Egal::Egal(string liaison)
-
 {
 	_facts.push_back(&facts[get_fact_id(liaison)]);
 }
@@ -208,7 +201,6 @@ bool 	Egal::compare(string already_passed)
 }
 
 Not::Not(string liaison)
-
 {
 	char	c = liaison[liaison.size() - 1];
 	if ('A' <= c && c <= 'Z')

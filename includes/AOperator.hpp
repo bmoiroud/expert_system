@@ -6,22 +6,21 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:07:25 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:18:24 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef AOPERATOR_HPP
 # define AOPERATOR_HPP
 
-# include "Graph.hpp"
-# include "Fact.hpp"
+# include "expert_sys.hpp"
 
 using namespace std;
 
 class	AOperator: public Graph
 {
 	public:
-		AOperator(string liaison);
+		AOperator(void);
 		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;
