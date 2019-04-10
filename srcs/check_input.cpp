@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 16:30:14 by eferrand          #+#    #+#             */
-/*   Updated: 2019/04/10 14:40:03 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:38:34 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,14 +38,17 @@ void	combinaison_fact(string input, vector<std::string> &data, string base)
 
 //	envoie en parametre =ABD et doit avoir accès à la liste des règles
 //	return la valeur de la condition
-/*
+
 bool	check_case(string a_case)
 {
+	(void)a_case;
+	/*
 	for (all_rules)
 	{
 	}
+	*/
+	return (false);
 }
-*/
 
 //	Enregistrer debut zone influence de chaque caractere
 //	AB+CD+!+

@@ -6,13 +6,17 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:40:30 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:42:31 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AOperator.hpp"
 
-AOperator::~AOperator(void)
+AOperator::AOperator(void) : Graph()
+{
+}
+
+AOperator::~AOperator(void) 
 {
 	_facts.clear();
 	_op.clear();
@@ -72,7 +76,7 @@ bool 	And::compare(string already_passed)
 	return (a & b);
 }
 
-Or::Or(string liaison)
+Or::Or(string liaison) : AOperator()
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -126,7 +130,7 @@ bool	Or::compare(string already_passed)
 	return (a | b);
 }
 
-Xor::Xor(string liaison)
+Xor::Xor(string liaison) : AOperator()
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -180,7 +184,7 @@ bool 	Xor::compare(string already_passed)
 	return (a ^ b);
 }
 
-Egal::Egal(string liaison)
+Egal::Egal(string liaison) : AOperator()
 {
 	_facts.push_back(&facts[get_fact_id(liaison)]);
 }
@@ -199,7 +203,7 @@ bool 	Egal::compare(string already_passed)
 	return (false);
 }
 
-Not::Not(string liaison)
+Not::Not(string liaison) : AOperator()
 {
 	char	c = liaison[liaison.size() - 1];
 	if ('A' <= c && c <= 'Z')
