@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 16:46:12 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:51:12 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ vector <string>		strsplit(string str)
 	while (str[i])
 	{
 		j = i;
-		cout << 1;
 		if (str[i] != '!')
 			while (str[i] != ' ' && str[i] != '\t' && str[i])
 				i++;
@@ -126,6 +125,7 @@ int					check_par(string line)
 		if (j < k)
 			return (-1);
 		if (line[i] == '=' && line[i + 1] == '>')
+		{
 			if (j != k)
 				return (-1);
 			else
@@ -133,6 +133,7 @@ int					check_par(string line)
 				j = 0;
 				k = 0;
 			}
+		}
 	}
 	if (j != k)
 		return (-1);
@@ -219,14 +220,11 @@ vector <string>		parse(const char *filename)
 	string			line;
 	vector <string> lines;
 	size_t			first_char;
-	int				i;
-	int				j;
 	int				k;
 
 	k = 0;
 	while (getline(file, line))
 	{
-		cout << line << endl;
 		first_char = line.find_first_not_of(" \t\n");
 		if (line.length() > first_char && line[first_char] != '#')
 		{
@@ -423,6 +421,31 @@ string				add_par(string str)
 	return (str);
 }
 
+string				del_not(string str)
+{
+	string 	str2;
+	int		i;
+	int		j;
+	
+	i = -1;
+	j = 0;
+	while(++i < str.length())
+	{
+		if (str[i] != '!')
+			str2.push_back(str[i]);
+		else
+		{
+			j = 0;
+			while(str[i] == '!' || str[i] == ' ' || str[i] == '\t')
+				(str[i] == '!') ? j++ && i++ : i++;
+			if (j % 2 == 1)
+				str2.push_back('!');
+		}
+	}
+	cout << str2 << endl;
+	return (str2);
+}
+
 int					parametre_inacceptable(string line)
 {
 	if ((line.find('|') != string::npos || line.find('^') != string::npos) && line.find("<=>") != string::npos)
@@ -450,8 +473,8 @@ int					main(int argc, const char *argv[])
 			if (lines[i][0] != '=' && lines[i][0] != '?')
 			{
 				tmp = split(lines[i]);
-				parsed_lines.push_back(rpn(add_par(tmp[0])));
-				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(add_par(tmp[1])));
+				parsed_lines.push_back(rpn(add_par(del_not(tmp[0]))));
+				parsed_lines.push_back(((lines[i][lines[i].find('=') - 1] == '<') ? "<=>" : "=>") + rpn(add_par(del_not(tmp[1]))));
 			}
 			else if (lines[i][0] == '=')
 			{
@@ -465,6 +488,6 @@ int					main(int argc, const char *argv[])
 	}
 
 	vector<string>	data; //TODO
-	Graph			graph(data);
+	// Graph			graph(data);
 	return (0);
 }
