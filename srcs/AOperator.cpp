@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 14:54:30 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:35:36 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,11 @@
 #include "Fact.hpp"
 #include "AOperator.hpp"
 
-AOperator::~AOperator(void)
+AOperator::AOperator(void) : Graph()
+{
+}
+
+AOperator::~AOperator(void) 
 {
 	_facts.clear();
 	_op.clear();
@@ -33,7 +37,7 @@ void	AOperator::connect_op(vector <string> str, int i)
 }
 */
 
-And::And(string liaison)
+And::And(string liaison) : AOperator()
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -87,7 +91,7 @@ bool 	And::compare(string already_passed)
 	return (a & b);
 }
 
-Or::Or(string liaison)
+Or::Or(string liaison) : AOperator()
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -141,7 +145,7 @@ bool	Or::compare(string already_passed)
 	return (a | b);
 }
 
-Xor::Xor(string liaison)
+Xor::Xor(string liaison) : AOperator()
 {
 	vector<int>	all;
 	get_influence(liaison, all);
@@ -195,7 +199,7 @@ bool 	Xor::compare(string already_passed)
 	return (a ^ b);
 }
 
-Egal::Egal(string liaison)
+Egal::Egal(string liaison) : AOperator()
 {
 	_facts.push_back(&facts[get_fact_id(liaison)]);
 }
@@ -214,7 +218,7 @@ bool 	Egal::compare(string already_passed)
 	return (false);
 }
 
-Not::Not(string liaison)
+Not::Not(string liaison) : AOperator()
 {
 	char	c = liaison[liaison.size() - 1];
 	if ('A' <= c && c <= 'Z')

@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:23:22 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:32:03 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ using namespace std;
 class	AOperator: public Graph
 {
 	public:
-		AOperator(void) : Graph(){};
+		AOperator(void);
 		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;
