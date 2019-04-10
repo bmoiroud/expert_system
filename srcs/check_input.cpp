@@ -6,7 +6,7 @@
 /*   By: eferrand <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/01 16:30:14 by eferrand          #+#    #+#             */
-/*   Updated: 2019/04/02 16:49:07 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:40:03 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@ void	list_error_input()
 {
 }
 
-void	combinaison_fact(std::string input, std::vector<std::string> &data,
-		std::string base = "")
+void	combinaison_fact(string input, vector<std::string> &data, string base)
 {
 	int		i = 0;
 
@@ -39,12 +38,14 @@ void	combinaison_fact(std::string input, std::vector<std::string> &data,
 
 //	envoie en parametre =ABD et doit avoir accès à la liste des règles
 //	return la valeur de la condition
+/*
 bool	check_case(string a_case)
 {
 	for (all_rules)
 	{
 	}
 }
+*/
 
 //	Enregistrer debut zone influence de chaque caractere
 //	AB+CD+!+
@@ -52,9 +53,7 @@ bool	check_case(string a_case)
 //	Si notre fact est compris entre pos et zone influence alors on est concerné
 void	get_influence(string str, vector<int> &all)
 {
-	int			pos = -1; // last_find of fact.name
 	int			a;
-	int			count = 0;
 
 	a  = -1;
 	while (++a < str.size())
