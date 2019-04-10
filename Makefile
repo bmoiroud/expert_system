@@ -6,7 +6,7 @@
 #    By: eferrand <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 22:43:33 by eferrand          #+#    #+#              #
-#    Updated: 2017/10/01 05:09:38 by eferrand         ###   ########.fr        #
+#    Updated: 2019/04/10 14:26:26 by eferrand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ INCLUDES		:=	-I$(INC_DIR)
 
 # compiler and flags
 CC				:=	g++
-CFLAGS			:=	-std=c++11 -Wall -Wextra # -Werror -fsanitize=address -O0
+CFLAGS			:=	-std=c++11 -Wall -Wextra -Werror -Wno-sign-compare # -fsanitize=address -O0
 
 all: obj $(NAME)
 
