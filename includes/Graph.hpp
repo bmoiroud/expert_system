@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:18:44 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:34:57 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define GRAPH_HPP
 
 # include "expert_sys.hpp"
-# include <vector>
 
 using namespace std;
 
@@ -23,7 +22,6 @@ class		Fact;
 class		Graph
 {
 	public:
-		Graph();
 		Graph(vector<string> data);
 		~Graph(void);
 

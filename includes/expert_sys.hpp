@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:18:44 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:05:20 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,6 @@
 # include <cstring>
 # include <fstream>
 # include <vector>
-
-# include "Graph.hpp"
-# include "Fact.hpp"
-# include "AOperator.hpp"
 
 using namespace std;
 

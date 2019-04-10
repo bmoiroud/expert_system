@@ -6,12 +6,15 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:57:35 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:28:55 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Graph.hpp"
 #include "AOperator.hpp"
+#include "Graph.hpp"
+#include "Fact.hpp"
+
+using namespace std;
 
 AOperator::AOperator(void)
 {

@@ -6,12 +6,15 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:58:42 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 18:28:55 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fact.hpp"
 #include "AOperator.hpp"
+#include "Graph.hpp"
+
+using namespace std;
 
 Fact::Fact(Graph *Master, const string Name, const bool state)
 {
