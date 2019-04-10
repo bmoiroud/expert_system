@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Graph.hpp"
+#include "Fact.hpp"
 #include "AOperator.hpp"
 
 AOperator::~AOperator(void)
