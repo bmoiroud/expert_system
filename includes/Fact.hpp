@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:23:22 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:29:18 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ class	AOperator;
 class	Fact: public Graph
 {
 	public:
-		Fact(const string name, const bool state) : Graph(){};
+		Fact(const string name, const bool state);
 		~Fact(void);
 
 		// TODO
