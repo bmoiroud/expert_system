@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 15:20:04 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:23:22 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # define	XOR 4
 
 #include "Fact.hpp"
+
+using namespace std;
 
 class	AOperator: public Graph
 {
