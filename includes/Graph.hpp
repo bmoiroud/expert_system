@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/02 18:16:27 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:00:42 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class		Graph
 		bool					calc_fact(string name);
 		int						get_fact_id(string name);
 		int						get_fact_id(char name);
-		string					get_list(string type);
+		string					get_list(bool type);
 		void					print_list();
 		void					resolve();
 		void					check_input(string allFacts);

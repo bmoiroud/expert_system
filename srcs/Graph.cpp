@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 15:06:10 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:00:42 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,9 +131,16 @@ int				Graph::get_fact_id(char name)
 	return (-1);
 }
 
-string	Graph::get_list(string type)
+string	Graph::get_list(bool type)
 {
+	string	ret;
 
+	for (int a = 0; a < facts.size(); ++a)
+	{
+		if (type == facts[a].value)
+			ret += facts[a].name;
+	}
+	return (ret);
 }
 
 void		Graph::print_list()

@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 18:47:22 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:55:06 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ bool	Fact::calc(string already_passed)
 		if (_cond[a]->compare(already_passed) == true)
 			return (true);
 	}
+	return (false);
 }
 
 void	Fact::create_operator(string condition, string conclusion)
@@ -83,4 +84,5 @@ bool		Fact::change_state()
 		}
 	}
 	*/
+	return (false);
 }

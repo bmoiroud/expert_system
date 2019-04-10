@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/08 15:15:18 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:54:30 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -211,6 +211,7 @@ bool 	Egal::compare(string already_passed)
 		case 1:
 			return (_op[0]->compare(already_passed));
 	}
+	return (false);
 }
 
 Not::Not(string liaison)
@@ -239,4 +240,5 @@ bool 	Not::compare(string already_passed)
 		case 1:
 			return (!_op[0]->compare(already_passed));
 	}
+	return (false);
 }
