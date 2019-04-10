@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eferrand <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 22:43:33 by eferrand          #+#    #+#              #
-#    Updated: 2019/04/10 14:26:26 by eferrand         ###   ########.fr        #
+#    Updated: 2019/04/10 14:30:37 by bmoiroud         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,3 +63,5 @@ relibs:
 	@make re --no-print-directory
 
 re: fclean all
+
+.PHONY: all obj clean fclean relibs re
