@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:23:22 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:40:08 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # define	OR 3
 # define	XOR 4
 
-#include "Fact.hpp"
+# include "Fact.hpp"
+# include "Graph.hpp"
 
 using namespace std;
 
@@ -30,10 +31,6 @@ class	AOperator: public Graph
 		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;
-		/* inutile ?
-		void			connect_fact(vector <string> str, int i);
-		void			connect_op(vector <string> str, int i);
-		*/
 
 	protected:
 		vector <Fact*>		_facts;

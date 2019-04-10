@@ -6,12 +6,10 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 14:54:30 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 15:40:30 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Graph.hpp"
-#include "Fact.hpp"
 #include "AOperator.hpp"
 
 AOperator::~AOperator(void)
@@ -19,19 +17,6 @@ AOperator::~AOperator(void)
 	_facts.clear();
 	_op.clear();
 }
-
-/* inutile ?
-void	AOperator::connect_fact(vector <string> str, int i)
-{
-	if (!this->graph.fact_exist(str[i]))
-		this->graph.create_fact(str[i]);
-}
-
-void	AOperator::connect_op(vector <string> str, int i)
-{
-	
-}
-*/
 
 And::And(string liaison)
 {
