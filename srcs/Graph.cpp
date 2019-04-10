@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "Graph.hpp"
+#include "Fact.hpp"
 
 using namespace std;
 
@@ -61,7 +62,7 @@ Graph::Graph(vector<string> data)
 		while (++b < rules[a].size())
 		{
 			if ('A' <= rules[a][b] && rules[a][b] <= 'Z')
-				get_fact_id(rules[a][b]).create_operator(rules[a-1], rules[a]);
+				facts[get_fact_id(rules[a][b])].create_operator(rules[a-1], rules[a]);
 			if (rules[a][b] == '|' || rules[a][b] == '^')
 			{
 				string tmp = rules[a];
@@ -79,11 +80,13 @@ Graph::~Graph(void)
 	facts.clear();
 }
 
-void			Graph::create_fact(string name)
+void			Graph::create_fact(char name, bool value)
 {
-	facts.push_back(Fact(name, false));
+	if (!fact_exist(string(1, name)))
+		facts.push_back(Fact(string(1, name), value));
 }
 
+/*
 void			Graph::create_rule(vector <string> str)
 {
 	int		i;
@@ -93,6 +96,7 @@ void			Graph::create_rule(vector <string> str)
 		create_fact(str[i]);
 	facts[get_fact_id(str[i])]->create_operator(str, i - 1);
 }
+*/
 
 bool			Graph::fact_exist(string name)
 {
@@ -100,14 +104,9 @@ bool			Graph::fact_exist(string name)
 
 	i = -1;
 	while (++i < facts.size())
-		if (facts[i].name == str)
+		if (facts[i].name == name)
 			return (true);
 	return (false);
-}
-
-bool			Graph::calc_fact()
-{
-
 }
 
 int				Graph::get_fact_id(string name)
@@ -132,12 +131,12 @@ int				Graph::get_fact_id(char name)
 	return (-1);
 }
 
-static string	Graph::get_list(string type)
+string	Graph::get_list(string type)
 {
 
 }
 
-static void		Graph::print_list()
+void		Graph::print_list()
 {
 
 }
@@ -146,23 +145,23 @@ void			Graph::resolve()
 {
 	int 	a = -1;
 	while (++a < facts.size())
-		facts.calc("");
+		facts[a].calc("");
 	a = -1;
 	while (++a < to_find.size())
-		cout << facts[a].name << " = " << facts[a]._value << endl;
+		cout << facts[a].name << " = " << facts[a].value << endl;
 }
 
 void			Graph::check_input(string allFacts)
 {
 	// faire un par un tous les statements en registrant dans un vector le resultat attendu. Si un statemen envoie un résultat oposé après calcul INCONHERENCE
-	string allFacts = "ABCD";
 	vector<string>	data;
+
 	while (allFacts.size())
 	{
-		data.push_back(input.substr(0 ,1));
+		data.push_back(allFacts.substr(0 ,1));
 		//cout << input[0] << endl;
-		combinaison_fact(input, data);
-		input.erase(0,1);
+		combinaison_fact(allFacts, data);
+		allFacts.erase(0,1);
 	}
 
 	for (int a = 0; a < data.size(); ++a)
@@ -170,5 +169,4 @@ void			Graph::check_input(string allFacts)
 		//cout << data[a] << endl;
 		check_case(data[a]);
 	}
-	return 0;
 }

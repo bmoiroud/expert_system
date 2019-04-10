@@ -35,9 +35,9 @@ class	Fact: public Graph
 		bool		change_state();
 
 		string		name;
+		bool		value;
 		
 	protected:
-		bool				_value;
 		vector <AOperator*>	_cond;	//condition
 		vector <bool>		_concl;	//conclusion
 };

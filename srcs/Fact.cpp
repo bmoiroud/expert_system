@@ -16,7 +16,7 @@
 Fact::Fact(const string Name, const bool state)
 {
 	name = Name;
-	_value = state;
+	value = state;
 }
 
 Fact::~Fact()
@@ -28,7 +28,7 @@ bool	Fact::calc(string already_passed)
 {
 	if (already_passed.find(name) != string::npos)
 		return false;
-	if (_value == true) // faire à la fin pour checker incohérence ?
+	if (value == true) // faire à la fin pour checker incohérence ?
 		return (true);
 	for (int a = 0; a < _cond.size(); ++a)
 	{

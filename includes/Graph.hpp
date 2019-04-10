@@ -27,21 +27,22 @@ class		Graph
 		Graph(vector<string> data);
 		~Graph(void);
 
-		void					create_fact(string name);
-		void					create_rule(vector <string> str);
+		void					create_fact(char name, bool value = false);
+//		void					create_rule(vector <string> str);
 		bool					fact_exist(string name);
 		bool					calc_fact(string name);
-		static int				get_fact_id(string name);
-		static int				get_fact_id(char name);
-		static string			get_list(string type);
-		static void				print_list();
+		int						get_fact_id(string name);
+		int						get_fact_id(char name);
+		string					get_list(string type);
+		void					print_list();
 		void					resolve();
+		void					check_input(string allFacts);
 
 		//	TODO
 		void					delete_duplicate(vector<string> &data);
 		void					simplify_rules(vector<string> &data);
 
-		static int				n_facts;
+		int						n_facts;
 		static vector<Fact>		facts;
 		bool					test;
 		std::string				to_find;
