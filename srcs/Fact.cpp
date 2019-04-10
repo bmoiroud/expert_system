@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:49:20 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:58:42 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,15 @@ void	Fact::create_operator(string condition, string conclusion)
 	//condition
 	a = all.size() - 1;
 	if (condition[a] == '!')
-		_cond.push_back(new Not(condition.substr(0, a)));
+		_cond.push_back(new Not(condition.substr(0, a), master));
 	else if (condition[a] == '+')
-		_cond.push_back(new And(condition.substr(0, a)));
+		_cond.push_back(new And(condition.substr(0, a), master));
 	else if (condition[a] == '|')
-		_cond.push_back(new Or(condition.substr(0, a)));
+		_cond.push_back(new Or(condition.substr(0, a), master));
 	else if(condition[a] == '^')
-		_cond.push_back(new Xor(condition.substr(0, a)));
+		_cond.push_back(new Xor(condition.substr(0, a), master));
 	else
-		_cond.push_back(new Egal(condition));
+		_cond.push_back(new Egal(condition, master));
 
 	//conclusion
 	all.clear();

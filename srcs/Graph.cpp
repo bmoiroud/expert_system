@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:24:44 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:59:45 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ Graph::~Graph(void)
 void			Graph::create_fact(char name, bool value)
 {
 	if (!fact_exist(string(1, name)))
-		facts.push_back(Fact(string(1, name), value));
+		facts.push_back(Fact(this, string(1, name), value));
 }
 
 /*

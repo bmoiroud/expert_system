@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:51:30 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:56:00 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class	Graph;
 class	AOperator
 {
 	public:
-		AOperator(Graph *Master);
+		AOperator(void);
 		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;

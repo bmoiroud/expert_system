@@ -6,16 +6,15 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:50:34 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:57:35 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Graph.hpp"
 #include "AOperator.hpp"
 
-AOperator::AOperator(Graph *Master)
+AOperator::AOperator(void)
 {
-	master = Master;
 }
 
 AOperator::~AOperator(void) 
@@ -195,7 +194,7 @@ bool 	Xor::compare(string already_passed)
 Egal::Egal(string liaison, Graph *Master)
 {
 	master = Master;
-	_facts.push_back(&master->facts[master->get_fact_id(liaison, Graph *Master) : AOperator(Master)]);
+	_facts.push_back(&master->facts[master->get_fact_id(liaison)]);
 }
 
 Egal::~Egal(void) {}
