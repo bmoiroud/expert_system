@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 14:51:12 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/10 14:57:31 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -437,12 +437,12 @@ string				del_not(string str)
 		{
 			j = 0;
 			while(str[i] == '!' || str[i] == ' ' || str[i] == '\t')
-				(str[i] == '!') ? j++ && i++ : i++;
-			if (j % 2 == 1)
+				(str[i] == '!') ? ((j++) && (i++)) : i++;
+			if ((j - 1) % 2 == 1)
 				str2.push_back('!');
+			i--;
 		}
 	}
-	cout << str2 << endl;
 	return (str2);
 }
 
