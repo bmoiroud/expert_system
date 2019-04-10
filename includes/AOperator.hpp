@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:39:08 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:18:24 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:51:30 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@
 
 using namespace std;
 
-class	AOperator: public Graph
+class	Graph;
+
+class	AOperator
 {
 	public:
-		AOperator(void);
+		AOperator(Graph *Master);
 		virtual ~AOperator(void);
 
 		virtual bool	compare(string already_passed) = 0;
 
 	protected:
-		vector <Fact*>		_facts;
-		vector <AOperator*>	_op;
+		vector<Fact*>		_facts;
+		vector<AOperator*>	_op;
+		Graph				*master;
 };
 
 class	And: public AOperator
 {
 	public:
-		And(string liaison);
+		And(string liaison, Graph *Master);
 		~And(void);
 
 		virtual bool	compare(string already_passed);
@@ -42,7 +45,7 @@ class	And: public AOperator
 class	Or: public AOperator
 {
 	public:
-		Or(string liaison);
+		Or(string liaison, Graph *Master);
 		~Or(void);
 		
 		virtual bool	compare(string already_passed);
@@ -51,7 +54,7 @@ class	Or: public AOperator
 class	Xor: public AOperator
 {
 	public:
-		Xor(string liaison);
+		Xor(string liaison, Graph *Master);
 		~Xor(void);
 		
 		virtual bool	compare(string already_passed);
@@ -60,7 +63,7 @@ class	Xor: public AOperator
 class	Egal: public AOperator
 {
 	public:
-		Egal(string liaison);
+		Egal(string liaison, Graph *Master);
 		~Egal(void);
 
 		virtual bool	compare(string already_passed);
@@ -69,7 +72,7 @@ class	Egal: public AOperator
 class	Not: public AOperator
 {
 	public:
-		Not(string liaison);
+		Not(string liaison, Graph *Master);
 		~Not(void);
 
 		virtual bool	compare(string already_passed);

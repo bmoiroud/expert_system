@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 17:18:44 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:49:27 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ using namespace std;
 
 class	AOperator;
 
-class	Fact: public Graph
+class	Fact
 {
 	public:
-		Fact(const string name, const bool state);
+		Fact(Graph *Master, const string name, const bool state);
 		~Fact(void);
 
 		// TODO
@@ -38,8 +38,9 @@ class	Fact: public Graph
 		bool		value;
 		
 	protected:
-		vector <AOperator*>	_cond;	//condition
-		vector <bool>		_concl;	//conclusion
+		vector<AOperator*>	_cond;	//condition
+		vector<bool>		_concl;	//conclusion
+		Graph				*master;
 };
 
 #endif

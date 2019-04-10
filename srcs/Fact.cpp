@@ -6,15 +6,16 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:29:27 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:49:20 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fact.hpp"
 #include "AOperator.hpp"
 
-Fact::Fact(const string Name, const bool state): Graph()
+Fact::Fact(Graph *Master, const string Name, const bool state)
 {
+	master = Master;
 	name = Name;
 	value = state;
 }

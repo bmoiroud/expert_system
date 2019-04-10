@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 15:00:42 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/10 17:24:44 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include "Fact.hpp"
 
 using namespace std;
-
-Graph::Graph()
-{
-}
 
 // a quel moment le parametre est clear ?
 Graph::Graph(vector<string> data)
