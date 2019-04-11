@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 18:09:30 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:20:41 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ Fact::~Fact()
 
 bool	Fact::calc(string already_passed)
 {
-	
+	int		a = 0;
+	bool	ret;
+	bool	init_ret = false;
 
 	if (already_passed.find(name) != string::npos) // si on est deja passé dedans
 	{
@@ -42,15 +44,20 @@ bool	Fact::calc(string already_passed)
 		cout << "return true" << endl;
 		return (true);
 	}
-	for (int a = 0; a < _cond.size(); ++a)
+	while (a < _cond.size())
 	{
 		if (_cond[a]->compare(already_passed + name) == true)
 		{
+			if (init_ret == true && _concl[a] != ret)
+				cout << "tout deconne" << endl;	// TODO erreur
+			ret = _concl[a];
+			init_ret = true;
 			cout << "return apres calcul true" << endl;
-			return (_concl[a]);
+
 		}
+		++a;
 	}
-	return (false);
+	return (_concl[a]);
 }
 
 void	Fact::create_operator(string condition, string conclusion)
