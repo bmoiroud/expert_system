@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 19:18:24 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:22:08 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,7 @@ Fact::~Fact()
 bool	Fact::calc(string already_passed)
 {
 	int		a = 0;
-	int		b;
-	bool	ret;
-	bool	init_ret = false;
+	int		ret = -1;
 
 	if (already_passed.find(name) != string::npos) // si on est deja passé dedans
 	{
@@ -44,12 +42,10 @@ bool	Fact::calc(string already_passed)
 	{
 		if (_cond[a]->compare(already_passed + name) == true)
 		{
-			if (init_ret == true && _concl[a] != ret)
+			if (ret != -1 && _concl[a] != _concl[ret])
 				cout << "tout deconne" << endl;	// TODO erreur
-			ret = _concl[a];
-			init_ret = true;
+			ret = a;
 			cout << "calculs faits" << endl;
-			b = a;
 		}
 		++a;
 	}
@@ -58,10 +54,10 @@ bool	Fact::calc(string already_passed)
 		cout << "return true" << endl;
 		return (true);
 	}
-	if (init_ret)
+	if (ret != -1)
 	{
 		cout << "init_ret = true donc ret" << endl;
-		return (_concl[b]);
+		return (_concl[ret]);
 	}
 	return (false);
 }
