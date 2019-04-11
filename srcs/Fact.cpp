@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 18:38:52 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 19:18:24 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ Fact::~Fact()
 bool	Fact::calc(string already_passed)
 {
 	int		a = 0;
+	int		b;
 	bool	ret;
 	bool	init_ret = false;
 
@@ -47,8 +48,8 @@ bool	Fact::calc(string already_passed)
 				cout << "tout deconne" << endl;	// TODO erreur
 			ret = _concl[a];
 			init_ret = true;
-			cout << "return apres calcul true" << endl;
-
+			cout << "calculs faits" << endl;
+			b = a;
 		}
 		++a;
 	}
@@ -58,7 +59,10 @@ bool	Fact::calc(string already_passed)
 		return (true);
 	}
 	if (init_ret)
-		return (_concl[a]);
+	{
+		cout << "init_ret = true donc ret" << endl;
+		return (_concl[b]);
+	}
 	return (false);
 }
 
