@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 15:36:48 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:56:28 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ Graph::Graph(vector<string> data)
 	while (++a < data.size() && (b = -1))
 		while (++b < data[a].size())
 			if ('A' <= data[a][b] && data[a][b] <= 'Z' && get_fact_id(data[a][b]) == -1)
-				create_fact(data[a][b], (data[data.size() - 3].find(data[a][b]) != string::npos ? true : false));
+				create_fact(data[a][b], ((data[data.size() - 2].find(data[a][b]) != string::npos) ? true : false));
 
 	//	recuperer les facts a trouver
 	to_find = data.back().substr(1);
@@ -147,10 +147,10 @@ void			Graph::resolve()
 {
 	int 	a = -1;
 	while (++a < facts.size())
-		facts[a].calc("");
+		facts[a].value = facts[a].calc("");
 	a = -1;
 	while (++a < to_find.size())
-		cout << facts[2].name << " = " << facts[2].value << endl;
+		cout << facts[a].name << " = " << facts[a].value << endl;
 }
 
 void			Graph::check_input(string allFacts)

@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:28:55 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:50:10 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ bool	Fact::calc(string already_passed)
 		return (true);
 	for (int a = 0; a < _cond.size(); ++a)
 	{
-		if (_cond[a]->compare(already_passed) == true)
+		if (_cond[a]->compare(already_passed + name) == true)
 			return (true);
 	}
 	return (false);
