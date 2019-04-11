@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:34:57 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:38:17 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,8 @@ class		Graph
 		~Graph(void);
 
 		void					create_fact(char name, bool value = false);
-//		void					create_rule(vector <string> str);
 		bool					fact_exist(string name);
 		bool					calc_fact(string name);
-		int						get_fact_id(string name);
 		int						get_fact_id(char name);
 		string					get_list(bool type);
 		void					print_list();

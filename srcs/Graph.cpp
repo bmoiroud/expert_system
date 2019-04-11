@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 16:36:34 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:38:17 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,12 @@ Graph::Graph(vector<string> data)
 			rules.push_back(data[a].substr(3));
 			rules.push_back(data[a - 1]);
 		}
-		else if (data[a].find("=>"))
+		else if (data[a].find("=>") != string::npos)
 			rules.push_back(data[a].substr(2));
 		else
 			rules.push_back(data[a].substr());
 	}
+
 	//	remplissage des facts avec les regles
 	a = 1;
 	while (a < rules.size())
@@ -78,18 +79,6 @@ void			Graph::create_fact(char name, bool value)
 		facts.push_back(Fact(this, string(1, name), value));
 }
 
-/*
-void			Graph::create_rule(vector <string> str)
-{
-	int		i;
-
-	i = str.size() - 1;
-	if (!fact_exist(str[i]))
-		create_fact(str[i]);
-	facts[get_fact_id(str[i])]->create_operator(str, i - 1);
-}
-*/
-
 bool			Graph::fact_exist(string name)
 {
 	int		i;
@@ -99,17 +88,6 @@ bool			Graph::fact_exist(string name)
 		if (facts[i].name == name)
 			return (true);
 	return (false);
-}
-
-int				Graph::get_fact_id(string name)
-{
-	int		i;
-
-	i = -1;
-	while (++i < n_facts)
-		if (facts[i].name == name)
-			return (i);
-	return (-1);
 }
 
 int				Graph::get_fact_id(char name)

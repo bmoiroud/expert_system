@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:28:55 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:39:47 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,13 @@ And::And(string liaison, Graph *Master)
 {
 	vector<int>	all;
 
+	cout << liaison << endl;
 	master = Master;
 	get_influence(liaison, all);
 	char	c = liaison[all.size() - 1];
+	cout << "master adresse : " << master << endl;
 	if ('A' <= c && c <= 'Z')
-		_facts.push_back(&master->facts[master->get_fact_id(c)]);
+		_facts.push_back(&(master->facts[master->get_fact_id(c)]));
 	else if (c == '!')
 		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() -2), master));
 	else if (c == '+')
@@ -45,6 +47,7 @@ And::And(string liaison, Graph *Master)
 		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() -2), master));
 	
 	c = liaison[all[all.size() - 1] - 1];
+	cout << "VISIBILITÉ" << c << endl;
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
@@ -197,7 +200,7 @@ bool 	Xor::compare(string already_passed)
 Egal::Egal(string liaison, Graph *Master)
 {
 	master = Master;
-	_facts.push_back(&master->facts[master->get_fact_id(liaison)]);
+	_facts.push_back(&master->facts[master->get_fact_id(liaison[0])]);
 }
 
 Egal::~Egal(void) {}

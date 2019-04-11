@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 16:40:48 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:54:28 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	Fact::create_operator(string condition, string conclusion)
 
 	//condition
 	a = all.size() - 1;
+	cout << "condition : " << condition << endl << "coupé en : " << condition.substr(0, a) << endl;
 	if (condition[a] == '!')
 		_cond.push_back(new Not(condition.substr(0, a), master));
 	else if (condition[a] == '+')
@@ -77,6 +78,8 @@ void	Fact::create_operator(string condition, string conclusion)
 		_cond.push_back(new Xor(condition.substr(0, a), master));
 	else
 		_cond.push_back(new Egal(condition, master));
+
+	cout << "tkl la famille" << endl;
 
 	//conclusion
 	all.clear();
