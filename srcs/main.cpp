@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:18:39 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:02:19 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -487,7 +487,7 @@ int					main(int argc, const char *argv[])
 			cout << ((i % 2 == 1) ? "conclusion : " : "condition : ") << parsed_lines[i] << endl;
 	}
 
-	vector<string>	data; //TODO
-	// Graph			graph(data);
+	Graph			graph(parsed_lines);
+	graph.resolve();
 	return (0);
 }

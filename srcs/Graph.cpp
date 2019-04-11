@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   graph.cpp                                          :+:      :+:    :+:   */
+/*   Graph.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:28:55 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 15:36:48 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,12 @@ Graph::Graph(vector<string> data)
 		else
 			rules.push_back(data[a].substr());
 	}
-
 	//	remplissage des facts avec les regles
 	a = 1;
-	while (a < rules.size())
+	while (a < rules.size() - 1)
 	{
 		b = -1;
-		while (++b < rules[a].size())
+		while (++b < rules[a].size() - 1)
 		{
 			if ('A' <= rules[a][b] && rules[a][b] <= 'Z')
 				facts[get_fact_id(rules[a][b])].create_operator(rules[a-1], rules[a]);
@@ -127,7 +126,7 @@ int				Graph::get_fact_id(char name)
 	return (-1);
 }
 
-string	Graph::get_list(bool type)
+string			Graph::get_list(bool type)
 {
 	string	ret;
 
@@ -139,7 +138,7 @@ string	Graph::get_list(bool type)
 	return (ret);
 }
 
-void		Graph::print_list()
+void			Graph::print_list()
 {
 
 }
@@ -151,7 +150,7 @@ void			Graph::resolve()
 		facts[a].calc("");
 	a = -1;
 	while (++a < to_find.size())
-		cout << facts[a].name << " = " << facts[a].value << endl;
+		cout << facts[2].name << " = " << facts[2].value << endl;
 }
 
 void			Graph::check_input(string allFacts)
