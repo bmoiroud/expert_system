@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 18:20:41 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:33:34 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,6 @@ bool	Fact::calc(string already_passed)
 		cout << "return value" << endl;
 		return (value);
 	}
-	if (value == true) // faire à la fin pour checker incohérence ?
-	{
-		cout << "return true" << endl;
-		return (true);
-	}
 	while (a < _cond.size())
 	{
 		if (_cond[a]->compare(already_passed + name) == true)
@@ -57,7 +52,14 @@ bool	Fact::calc(string already_passed)
 		}
 		++a;
 	}
-	return (_concl[a]);
+	if (value == true) // faire à la fin pour checker incohérence ?
+	{
+		cout << "return true" << endl;
+		return (true);
+	}
+	if (init_ret)
+		return (_concl[a]);
+	return (false);
 }
 
 void	Fact::create_operator(string condition, string conclusion)
@@ -67,16 +69,10 @@ void	Fact::create_operator(string condition, string conclusion)
 	int			a;
 	int			count = 0;
 
-	cout << "Conclusions en remplissage" << conclusion << endl;
 	get_influence(condition, all);
-
-	// debugage
-	if (all.size() != condition.size())
-		cout << "bug get_influence size" << endl;
 
 	//condition
 	a = all.size() - 1;
-	cout << "condition : " << condition << endl << "coupé en : " << condition.substr(0, a) << endl;
 	if (condition[a] == '!')
 		_cond.push_back(new Not(condition.substr(0, a), master));
 	else if (condition[a] == '+')
@@ -87,8 +83,6 @@ void	Fact::create_operator(string condition, string conclusion)
 		_cond.push_back(new Xor(condition.substr(0, a), master));
 	else
 		_cond.push_back(new Egal(condition, master));
-
-	cout << "tkl la famille" << endl;
 
 	//conclusion
 	all.clear();
