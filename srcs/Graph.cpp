@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 15:56:28 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:03:04 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,7 @@ void			Graph::resolve()
 	while (++a < facts.size())
 		facts[a].value = facts[a].calc("");
 	a = -1;
-	while (++a < to_find.size())
+	while (++a < facts.size())
 		cout << facts[a].name << " = " << facts[a].value << endl;
 }
 
