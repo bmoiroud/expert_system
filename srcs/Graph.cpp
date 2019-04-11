@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 16:03:04 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:36:34 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ Graph::Graph(vector<string> data)
 	data.pop_back(); // suppression ?ABC
 	data.pop_back(); //	suppression =ABC
 
-	//	enregistrer les regles
+	//	enregistrer les regles dans rules
 	a = -1;
 	while (++a < data.size())
 	{
@@ -51,19 +51,16 @@ Graph::Graph(vector<string> data)
 	}
 	//	remplissage des facts avec les regles
 	a = 1;
-	while (a < rules.size() - 1)
+	while (a < rules.size())
 	{
+		cout << "constructor regles : " << rules[a] << endl;
 		b = -1;
-		while (++b < rules[a].size() - 1)
+		while (++b < rules[a].size())
 		{
 			if ('A' <= rules[a][b] && rules[a][b] <= 'Z')
-				facts[get_fact_id(rules[a][b])].create_operator(rules[a-1], rules[a]);
-			if (rules[a][b] == '|' || rules[a][b] == '^')
 			{
-				string tmp = rules[a];
-				rules.clear();
-				data.clear();
-				error(rules[a]);
+				facts[get_fact_id(rules[a][b])].create_operator(rules[a-1], rules[a]);
+				break ;
 			}
 		}
 		a += 2;
@@ -147,7 +144,11 @@ void			Graph::resolve()
 {
 	int 	a = -1;
 	while (++a < facts.size())
+	{
+		cout << endl << facts[a].name << " = " << facts[a].value << endl;
 		facts[a].value = facts[a].calc("");
+		cout <<  "change to " << facts[a].value << endl << endl;
+	}
 	a = -1;
 	while (++a < facts.size())
 		cout << facts[a].name << " = " << facts[a].value << endl;

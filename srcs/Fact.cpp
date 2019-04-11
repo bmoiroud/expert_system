@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 15:50:10 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/11 16:40:48 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,23 @@ Fact::~Fact()
 
 bool	Fact::calc(string already_passed)
 {
-	if (already_passed.find(name) != string::npos)
-		return false;
+	if (already_passed.find(name) != string::npos) // si on est deja passé dedans
+	{
+		cout << "return value" << endl;
+		return (value);
+	}
 	if (value == true) // faire à la fin pour checker incohérence ?
+	{
+		cout << "return true" << endl;
 		return (true);
+	}
 	for (int a = 0; a < _cond.size(); ++a)
 	{
 		if (_cond[a]->compare(already_passed + name) == true)
+		{
+			cout << "return apres calcul true" << endl;
 			return (true);
+		}
 	}
 	return (false);
 }
@@ -48,6 +57,13 @@ void	Fact::create_operator(string condition, string conclusion)
 	int			pos = -1; // last_find of fact.name
 	int			a;
 	int			count = 0;
+
+	cout << "Conclusions en remplissage" << conclusion << endl;
+	get_influence(condition, all);
+
+	// debugage
+	if (all.size() != condition.size())
+		cout << "bug get_influence size" << endl;
 
 	//condition
 	a = all.size() - 1;
