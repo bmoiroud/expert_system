@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:05:20 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 14:57:20 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <cstring>
 # include <fstream>
 # include <vector>
+# include "Graph.hpp"
 
 using namespace std;
 
