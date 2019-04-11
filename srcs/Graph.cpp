@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 17:55:44 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:39:23 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ using namespace std;
 // a quel moment le parametre est clear ?
 Graph::Graph(vector<string> data)
 {
-	cout << (void *) this << endl;
 	vector<string>	rules; // condition suivi de conclusion en boucle
 
 	int		a = -1;
@@ -55,7 +54,6 @@ Graph::Graph(vector<string> data)
 	a = 1;
 	while (a < rules.size())
 	{
-		cout << "constructor regles : " << rules[a] << endl;
 		b = -1;
 		while (++b < rules[a].size())
 		{
@@ -126,7 +124,7 @@ void			Graph::resolve()
 	{
 		cout << endl << facts[a].name << " = " << facts[a].value << endl;
 		facts[a].value = facts[a].calc("");
-		cout <<  "change to " << facts[a].value << endl << endl;
+		cout <<  "change to " << facts[a].value << endl;
 	}
 	a = -1;
 	while (++a < facts.size())

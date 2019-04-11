@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 18:33:34 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:38:52 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ bool	Fact::calc(string already_passed)
 		}
 		++a;
 	}
-	if (value == true) // faire à la fin pour checker incohérence ?
+	if (value == true)
 	{
 		cout << "return true" << endl;
 		return (true);
