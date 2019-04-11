@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 16:54:28 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 18:09:30 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,8 @@ Fact::~Fact()
 
 bool	Fact::calc(string already_passed)
 {
+	
+
 	if (already_passed.find(name) != string::npos) // si on est deja passé dedans
 	{
 		cout << "return value" << endl;
@@ -45,7 +47,7 @@ bool	Fact::calc(string already_passed)
 		if (_cond[a]->compare(already_passed + name) == true)
 		{
 			cout << "return apres calcul true" << endl;
-			return (true);
+			return (_concl[a]);
 		}
 	}
 	return (false);
