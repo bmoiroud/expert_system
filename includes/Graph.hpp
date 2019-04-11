@@ -41,7 +41,7 @@ class		Graph
 		void					simplify_rules(vector<string> &data);
 
 		int						n_facts;
-		static vector<Fact>		facts;
+		vector<Fact>		facts;
 		bool					test;
 		std::string				to_find;
 };

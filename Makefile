@@ -45,7 +45,7 @@ obj:
 
 # linking rule: executable NAME needs OBJ_FILES to link
 $(NAME): $(OBJ_FILES)
-	$(CC) $(LINK) $(OBJ_FILES) -o $(NAME)
+	$(CC) -v $(LINK) $(OBJ_FILES) -o $(NAME)
 
 # compiler rule: each .o file in OBJ_DIR needs a .c file in SRC_DIR
 # $< -- input file (.c)
