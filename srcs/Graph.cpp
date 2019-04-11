@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 17:38:17 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:55:44 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ using namespace std;
 // a quel moment le parametre est clear ?
 Graph::Graph(vector<string> data)
 {
+	cout << (void *) this << endl;
 	vector<string>	rules; // condition suivi de conclusion en boucle
 
 	int		a = -1;
@@ -95,7 +96,7 @@ int				Graph::get_fact_id(char name)
 	int		i;
 
 	i = -1;
-	while (++i < n_facts)
+	while (++i < facts.size())
 		if (facts[i].name == string(1, name))
 			return (i);
 	return (-1);

@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 17:39:47 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/11 17:50:50 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ And::And(string liaison, Graph *Master)
 	get_influence(liaison, all);
 	char	c = liaison[all.size() - 1];
 	cout << "master adresse : " << master << endl;
+	cout << master->to_find << endl;
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&(master->facts[master->get_fact_id(c)]));
 	else if (c == '!')
