@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 16:03:37 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 16:57:21 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ AOperator::~AOperator(void)
 
 And::And(string liaison, Graph *Master)
 {
-	cout << "creation And::And\t\t" << "liaison : " << liaison << endl;
 	vector<int>	all;
 
 	master = Master;
 	get_influence(liaison, all);
+	cout << "creation And::And\t\t" << "liaison : " << liaison << "\t\telem a traiter : " << liaison[all.size() - 1] << liaison[all[all.size() - 1] - 1] << endl;
 	char	c = liaison[all.size() - 1];
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
@@ -49,13 +49,13 @@ And::And(string liaison, Graph *Master)
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+	else if (c == '+')
+		_op.push_back(new And(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+	else if (c == '|')
+		_op.push_back(new Or(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+	else if (c == '^')
+		_op.push_back(new Xor(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
 	cout << "sortie And::And" << endl;
 }
 
