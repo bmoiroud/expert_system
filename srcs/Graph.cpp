@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 15:33:36 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:40:54 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,14 +116,10 @@ void			Graph::resolve()
 {
 	int 	a = -1;
 	while (++a < facts.size())
-	{
-		cout << endl << facts[a].name << " = " << facts[a].value << endl;
 		facts[a].value = facts[a].calc("");
-		cout <<  "change to " << facts[a].value << endl;
-	}
 	a = -1;
-	while (++a < facts.size())
-		cout << facts[a].name << " = " << facts[a].value << endl;
+	while (++a < to_find.size())
+		cout << to_find[a] << " = " << facts[get_fact_id(to_find[a])].value << endl;
 }
 
 void			Graph::check_input(string allFacts)
