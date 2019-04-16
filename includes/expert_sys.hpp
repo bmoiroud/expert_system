@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 14:57:20 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:58:48 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@
 using namespace std;
 
 vector <string>		parse(const char *filename);
-vector <string>		strsplit(string str);
 string				trim(string str);
 string				remove_comment(string str);
 bool				check_term(string str);
@@ -38,11 +37,6 @@ int					check_mult_input(string line);
 bool				is_registered(char c, vector <char> facts);
 int					find_term(const string str, int i, bool next);
 int					parametre_inacceptable(string line);
-
-void	list_error_input();
-void	combinaison_fact(std::string input, std::vector<std::string> &data, 
-						std::string base = "");
-bool	check_case(string a_case);
-void	get_influence(string str, vector<int> &all);
+void				get_influence(string str, vector<int> &all);
 
 #endif

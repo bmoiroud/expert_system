@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:41:43 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:54:18 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,29 +25,6 @@ string				remove_comment(string str)
 	size_t			first = str.find_first_of('#');
 	
 	return (str.substr(0, first));
-}
-
-vector <string>		strsplit(string str)
-{
-	vector <string>	str2;
-	int				i;
-	int				j;
-
-	i = 0;
-	j = 0;
-	while (str[i])
-	{
-		j = i;
-		if (str[i] != '!')
-			while (str[i] != ' ' && str[i] != '\t' && str[i])
-				i++;
-		else
-			i++;
-		str2.push_back(str.substr(j, i - j));
-		while ((str[i] == ' ' || str[i] == '\t') && str[i])
-			i++;
-	}
-	return (str2);
 }
 
 vector <string>		split(string str)

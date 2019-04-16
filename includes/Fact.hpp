@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 18:17:06 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/10 18:34:57 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:53:01 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,8 @@ class	Fact
 		Fact(Graph *Master, const string name, const bool state);
 		~Fact(void);
 
-		// TODO
 		bool		calc(string already_passed);
-		bool		get_state(void);
 		void		create_operator(string condition, string conclusion);
-		bool		change_state();
 
 		string		name;
 		bool		value;

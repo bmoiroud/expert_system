@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:47:13 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:48:55 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,20 +88,4 @@ void	Fact::create_operator(string condition, string conclusion)
 				++count;
 	}
 	_concl.push_back((count % 2) == 0) ;
-}
-
-bool		Fact::change_state()
-{
-	/*
-	   int	a;
-
-	   a = -1;
-	   while (++a < _cond.size())
-	   {
-	   if (_cond[a]->calc() == true)
-	   {
-	   }
-	   }
-	   */
-	return (false);
 }
