@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 15:02:19 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:41:43 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -462,7 +462,7 @@ int					main(int argc, const char *argv[])
 	
 	i = -1;
 	if (argc < 2)
-		cout << "usage" << endl;
+		cout << "usage ./exper_system <file>" << endl;
 	else if (argc >= 3)
 		cout << "trop d'arg" << endl;
 	else
@@ -482,9 +482,6 @@ int					main(int argc, const char *argv[])
 				parsed_lines.push_back(lines[i + ((i + 1 < lines.size() && (lines[i + 1][0] == '?')) ? 1 : -1)]);
 			}
 		}
-		i = -1;
-		while(++i < parsed_lines.size())
-			cout << ((i % 2 == 1) ? "conclusion : " : "condition : ") << parsed_lines[i] << endl;
 	}
 
 	Graph			graph(parsed_lines);
