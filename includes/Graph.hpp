@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 17:55:52 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:33:40 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,9 +38,10 @@ class		Graph
 		void					delete_duplicate(vector<string> &data);
 		void					simplify_rules(vector<string> &data);
 
-		vector<Fact>		facts;
+		vector<Fact>			facts;
 		bool					test;
-		std::string				to_find;
+		bool					nonsense;
+		string					to_find;
 };
 
 #endif

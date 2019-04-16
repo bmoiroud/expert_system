@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/25 17:08:36 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 19:22:08 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:36:28 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,10 @@ bool	Fact::calc(string already_passed)
 		if (_cond[a]->compare(already_passed + name) == true)
 		{
 			if (ret != -1 && _concl[a] != _concl[ret])
-				cout << "tout deconne" << endl;	// TODO erreur
+			{
+				cout << "Erreur dans les inputs. Contradiction repérée" << endl;
+				exit(3);
+			}
 			ret = a;
 			cout << "calculs faits" << endl;
 		}
@@ -100,15 +103,15 @@ void	Fact::create_operator(string condition, string conclusion)
 bool		Fact::change_state()
 {
 	/*
-	int	a;
+	   int	a;
 
-	a = -1;
-	while (++a < _cond.size())
-	{
-		if (_cond[a]->calc() == true)
-		{
-		}
-	}
-	*/
+	   a = -1;
+	   while (++a < _cond.size())
+	   {
+	   if (_cond[a]->calc() == true)
+	   {
+	   }
+	   }
+	   */
 	return (false);
 }
