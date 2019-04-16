@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 19:17:12 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 16:57:21 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 17:44:51 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,25 @@ And::And(string liaison, Graph *Master)
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '+')                                                      
+		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '|')                                                      
+		_op.push_back(new Or(liaison.substr(all[all.size() - 1] , all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '^')                                                      
+		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
 	
 	c = liaison[all[all.size() - 1] - 1];
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	else if (c == '+')
-		_op.push_back(new And(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+		_op.push_back(new And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	else if (c == '|')
-		_op.push_back(new Or(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+		_op.push_back(new Or(liaison.substr(all[all[all.size() - 1] - 1] , all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	else if (c == '^')
-		_op.push_back(new Xor(liaison.substr(all[all[all.size() - 1] - 1], all.size() - 2), master));
+		_op.push_back(new Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	cout << "sortie And::And" << endl;
 }
 
@@ -97,25 +97,25 @@ Or::Or(string liaison, Graph *Master)
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '+')                                                      
+		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '|')                                                      
+		_op.push_back(new Or(liaison.substr(all[all.size() - 1] , all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '^')                                                      
+		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
 	
 	c = liaison[all[all.size() - 1] - 1];
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '+')
+		_op.push_back(new And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '|')
+		_op.push_back(new Or(liaison.substr(all[all[all.size() - 1] - 1] , all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '^')
+		_op.push_back(new Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	cout << "sortie Or::Or" << endl;
 }
 
@@ -155,25 +155,25 @@ Xor::Xor(string liaison, Graph *Master)
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '+')                                                      
+		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '|')                                                      
+		_op.push_back(new Or(liaison.substr(all[all.size() - 1] , all.size() - 1 - all[all.size() - 1]), master));
+	else if (c == '^')                                                      
+		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 1 - all[all.size() - 1]), master));
 	
 	c = liaison[all[all.size() - 1] - 1];
 	if ('A' <= c && c <= 'Z')
 		_facts.push_back(&master->facts[master->get_fact_id(c)]);
 	else if (c == '!')
-		_op.push_back(new Not(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '+')                                                                   
-		_op.push_back(new And(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '|')                                                                   
-		_op.push_back(new Or(liaison.substr(all[all.size() - 1], all.size() - 2), master));
-	else if (c == '^')                                                                   
-		_op.push_back(new Xor(liaison.substr(all[all.size() - 1], all.size() - 2), master));
+		_op.push_back(new Not(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '+')
+		_op.push_back(new And(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '|')
+		_op.push_back(new Or(liaison.substr(all[all[all.size() - 1] - 1] , all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
+	else if (c == '^')
+		_op.push_back(new Xor(liaison.substr(all[all[all.size() - 1] - 1], all[all.size() - 1] - 1 - all[all[all.size() - 1] - 1]), master));
 	cout << "sortie Xor::Xor" << endl;
 }
 
