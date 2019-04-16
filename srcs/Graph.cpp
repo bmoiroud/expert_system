@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/11 18:39:23 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 15:33:36 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,8 @@ Graph::Graph(vector<string> data)
 	{
 		b = -1;
 		while (++b < rules[a].size())
-		{
 			if ('A' <= rules[a][b] && rules[a][b] <= 'Z')
-			{
 				facts[get_fact_id(rules[a][b])].create_operator(rules[a-1], rules[a]);
-				break ;
-			}
-		}
 		a += 2;
 	}
 }
