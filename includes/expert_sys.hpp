@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:15:16 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:58:48 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:07:00 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,7 @@ using namespace std;
 vector <string>		parse(const char *filename);
 string				trim(string str);
 string				remove_comment(string str);
-bool				check_term(string str);
-bool				is_fact(string str);
 bool				is_fact(char c);
-bool				is_operator(string str);
 bool				is_operator(char c);
 void				error(string line);
 int					check_init_req(string line, int i, int c);

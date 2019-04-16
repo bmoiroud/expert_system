@@ -6,7 +6,7 @@
 #    By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/01/23 22:43:33 by eferrand          #+#    #+#              #
-#    Updated: 2019/04/10 18:27:07 by eferrand         ###   ########.fr        #
+#    Updated: 2019/04/16 19:06:05 by eferrand         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ FILE_LIST		:=	main.cpp		\
 					AOperator.cpp	\
 					Fact.cpp		\
 					Graph.cpp		\
-					check_input.cpp
+					get_influence.cpp
 
 OBJ_FILES		:= $(addprefix $(OBJ_DIR)/,$(FILE_LIST:.cpp=.o))
 

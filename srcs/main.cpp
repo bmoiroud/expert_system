@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:54:18 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:06:56 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,36 +43,9 @@ bool				is_fact(char c)
 	return (c >= 65 && c <= 90);
 }
 
-bool				is_fact(string str)
-{
-	if (str.length() > 2)
-		return (false);
-	if (str.length() == 2)
-	{
-		if (str[0] != '!' && (str[1] < 65 || str[1] > 90))
-			return (false);
-	}
-	else
-		if ((str[0] < 65 || str[0] > 90))
-			return (false);
-	return (true);
-}
-
 bool				is_operator(char c)
 {
 	return (c == '|' || c == '+' || c == '^');
-}
-
-bool				is_operator(string str)
-{
-	if (str.length() != 1)
-		return (false);
-	return (str == "|" || str == "+" || str == "^");
-}
-
-bool				check_term(string str)
-{
-	return (!(!is_fact(str) && !is_operator(str) && str != "=>"));
 }
 
 int					check_par(string line)

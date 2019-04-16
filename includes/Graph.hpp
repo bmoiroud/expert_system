@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:43 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:52:18 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:09:27 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ class		Graph
 		void					resolve();
 
 		vector<Fact>			facts;
-		bool					test;
 		bool					nonsense;
 		string					to_find;
 };
