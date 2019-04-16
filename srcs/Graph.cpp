@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 18:40:54 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:46:18 by eferrand         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,14 +130,10 @@ void			Graph::check_input(string allFacts)
 	while (allFacts.size())
 	{
 		data.push_back(allFacts.substr(0 ,1));
-		//cout << input[0] << endl;
 		combinaison_fact(allFacts, data);
 		allFacts.erase(0,1);
 	}
 
 	for (int a = 0; a < data.size(); ++a)
-	{
-		//cout << data[a] << endl;
 		check_case(data[a]);
-	}
 }
