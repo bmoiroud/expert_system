@@ -99,7 +99,10 @@ void			Graph::resolve()
 {
 	int 	a = -1;
 	while (++a < facts.size())
+	{
 		facts[a].value = facts[a].calc("");
+		facts[a].sure = true;
+	}
 	a = -1;
 	while (++a < to_find.size())
 		cout << to_find[a] << " = " << facts[get_fact_id(to_find[a])].value << endl;

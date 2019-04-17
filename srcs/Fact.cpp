@@ -21,6 +21,7 @@ Fact::Fact(Graph *Master, const string Name, const bool state)
 	master = Master;
 	name = Name;
 	value = state;
+	sure = state;
 }
 
 Fact::~Fact()
@@ -39,7 +40,7 @@ bool	Fact::calc(string already_passed)
 	{
 		if (_cond[a]->compare(already_passed + name) == true)
 		{
-			if (ret != -1 && _concl[a] != _concl[ret])
+			if ((ret != -1 && _concl[a] != _concl[ret]) || (sure == true && _concl[a] != value))
 			{
 				cout << "Erreur dans les inputs. Contradiction repérée" << endl;
 				exit(3);
