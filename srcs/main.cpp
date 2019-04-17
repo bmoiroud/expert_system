@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/19 17:41:20 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/16 19:06:56 by eferrand         ###   ########.fr       */
+/*   Updated: 2019/04/17 15:34:11 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,7 +196,7 @@ vector <string>		parse(const char *filename)
 	}
 	if (k != 124)
 	{
-		cout << "pas bon" << endl;
+		cout << ((k < 124) ? "=/? non trouvé" : "trop de =/?") << endl;
 		exit(EXIT_FAILURE);
 	}
 	return (lines);
