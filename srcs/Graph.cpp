@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/17 17:04:40 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/16 18:52:15 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,12 +101,9 @@ void			Graph::resolve()
 	while (++a < facts.size())
 	{
 		facts[a].value = facts[a].calc("");
-		cout << endl << facts[0].name << " " << facts[0].value << endl;
-		cout << facts[1].name << " " << facts[1].value << endl;
-		cout << facts[2].name << " " << facts[2].value << endl;
-		cout << facts[3].name << " " << facts[3].value << endl;
+		facts[a].sure = true;
 	}
 	a = -1;
 	while (++a < to_find.size())
-		cout << to_find[a] << " = " << ((facts[get_fact_id(to_find[a])].calc("") == 1) ? "True" : "False") << endl;
+		cout << to_find[a] << " = " << ((facts[get_fact_id(to_find[a])].value == 1) ? "True" : "False") << endl;
 }
