@@ -31,6 +31,7 @@ class	Fact
 
 		string		name;
 		bool		value;
+		bool		sure;
 		
 	protected:
 		vector<AOperator*>	_cond;	//condition

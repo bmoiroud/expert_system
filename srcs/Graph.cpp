@@ -6,7 +6,7 @@
 /*   By: bmoiroud <bmoiroud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/03/21 14:41:47 by bmoiroud          #+#    #+#             */
-/*   Updated: 2019/04/17 16:56:36 by bmoiroud         ###   ########.fr       */
+/*   Updated: 2019/04/17 17:04:40 by bmoiroud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,14 @@ int				Graph::get_fact_id(char name)
 void			Graph::resolve()
 {
 	int 	a = -1;
-	// while (++a < facts.size())
-	// {
-	// 	facts[a].value = facts[a].calc("");
-	// 	cout << endl << facts[0].name << " " << facts[0].value << endl;
-	// 	cout << facts[1].name << " " << facts[1].value << endl;
-	// 	cout << facts[2].name << " " << facts[2].value << endl;
-	// 	cout << facts[3].name << " " << facts[3].value << endl;
-	// }
+	while (++a < facts.size())
+	{
+		facts[a].value = facts[a].calc("");
+		cout << endl << facts[0].name << " " << facts[0].value << endl;
+		cout << facts[1].name << " " << facts[1].value << endl;
+		cout << facts[2].name << " " << facts[2].value << endl;
+		cout << facts[3].name << " " << facts[3].value << endl;
+	}
 	a = -1;
 	while (++a < to_find.size())
 		cout << to_find[a] << " = " << ((facts[get_fact_id(to_find[a])].calc("") == 1) ? "True" : "False") << endl;
