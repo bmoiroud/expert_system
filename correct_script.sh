@@ -29,12 +29,12 @@ echo "##################################################"
 echo ""
 echo "# test incoherence input"
 cat tests/test_incoherence
-./expert-system tests/test_double_inclusion
+./expert-system tests/test_incoherence
 read  -n 1
 
 echo "##################################################"
 echo ""
-echo "# test cas indetermined"
-cat tests/test_indetermined
-./expert-system tests/test_double_inclusion
+echo "# test cas undetermined"
+cat tests/test_undetermined
+./expert-system tests/test_undetermined
 read  -n 1
